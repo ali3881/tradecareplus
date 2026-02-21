@@ -1,0 +1,2059 @@
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+Error: ENOENT: no such file or directory, open '/var/www/tradecareplus/.next/BUILD_ID'
+    at async open (node:internal/fs/promises:634:25)
+    at async Object.readFile (node:internal/fs/promises:1236:14)
+    at async setupFsCheck (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-utils/filesystem.js:145:19)
+    at async initialize (/var/www/tradecareplus/node_modules/next/dist/server/lib/router-server.js:58:23)
+    at async Server.<anonymous> (/var/www/tradecareplus/node_modules/next/dist/server/lib/start-server.js:246:36) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/www/tradecareplus/.next/BUILD_ID'
+}
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found
+sh: 1: next: not found

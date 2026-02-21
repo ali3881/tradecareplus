@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  passwordHash  String?
+  phone         String?
+  image         String?
+  role          String    @default("USER") // Role
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  subscription  Subscription?
+  entitlement   Entitlement?
+  
+  chatThreads   ChatThread[]
+  messages      ChatMessage[]
+  videoRooms    VideoRoom[]
+  serviceRequests ServiceRequest[]
+  auditLogs     AuditLog[]
+  fileAssets    FileAsset[]
+  assignedJobs  ServiceRequest[] @relation("AssignedJobs")
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  stripeCustomerId     String             @unique
+  stripeSubscriptionId String             @unique
+  plan                 String             // Plan
+  status               String             // SubscriptionStatus
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Entitlement {
+  id                        String   @id @default(cuid())
+  userId                    String   @unique
+  year                      Int      // e.g., 2024
+  includedVisitsRemaining   Int      @default(0)
+  cctvDueAt                 DateTime?
+  jetBlastDueAt             DateTime?
+  hotWaterInspectionDueAt   DateTime?
+  lastChecklistSentAt       DateTime?
+  updatedAt                 DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ChatThread {
+  id        String       @id @default(cuid())
+  userId    String
+  status    String       @default("OPEN") // ThreadStatus
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+  assets   FileAsset[]
+}
+
+model ChatMessage {
+  id              String     @id @default(cuid())
+  threadId        String
+  sender          String     // ChatSender
+  senderId        String?    // If sent by specific user/staff
+  text            String
+  attachmentsJson String?    // JSON array of file URLs
+  createdAt       DateTime   @default(now())
+
+  thread   ChatThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  user     User?      @relation(fields: [senderId], references: [id])
+  assets   FileAsset[]
+}
+
+model FileAsset {
+  id        String   @id @default(cuid())
+  userId    String
+  threadId  String?
+  messageId String?
+  serviceRequestId String?
+  key       String   @unique // S3 key
+  url       String   // Public URL
+  mime      String
+  size      Int
+  createdAt DateTime @default(now())
+
+  user    User        @relation(fields: [userId], references: [id])
+  thread  ChatThread? @relation(fields: [threadId], references: [id])
+  message ChatMessage? @relation(fields: [messageId], references: [id])
+  serviceRequest ServiceRequest? @relation(fields: [serviceRequestId], references: [id])
+}
+
+model VideoRoom {
+  id        String          @id @default(cuid())
+  userId    String
+  provider  String          @default("DAILY") // VideoProvider
+  roomId    String          // Provider's room ID
+  roomUrl   String
+  status    String          @default("ACTIVE") // VideoRoomStatus
+  createdAt DateTime        @default(now())
+  endedAt   DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ServiceRequest {
+  id                String            @id @default(cuid())
+  userId            String
+  type              String            // ServiceRequestType
+  description       String
+  locationText      String?
+  preferredContactMethod String @default("CALL") // ContactMethod
+  photosJson        String?           // JSON array of S3 keys
+  urgency           String            @default("NORMAL") // Urgency
+  afterHours        Boolean           @default(false)
+  eligibilityStatus String            // EligibilityStatus
+  discountPercent   Float             @default(0)
+  includedReason    String?
+  quoteReason       String?
+  status            String            @default("NEW") // ServiceRequestStatus
+  notesJson         String?           // JSON for staff notes
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attachments FileAsset[]
+  
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedJobs", fields: [assignedToId], references: [id])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  metaJson  String?  // JSON details
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("STRING") // STRING, BOOLEAN, JSON
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

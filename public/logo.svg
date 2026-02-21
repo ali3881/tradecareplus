@@ -1,0 +1,26 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Roof -->
+  <path d="M200 20L50 100H90L200 40L310 100H350L200 20Z" fill="#1a237e" stroke="#1a237e" stroke-width="2"/>
+  <!-- Chimney -->
+  <rect x="130" y="45" width="20" height="30" fill="#1a237e"/>
+  
+  <!-- Window -->
+  <rect x="185" y="70" width="30" height="30" fill="white"/>
+  <rect x="188" y="73" width="11" height="11" fill="#f97316"/>
+  <rect x="201" y="73" width="11" height="11" fill="#f97316"/>
+  <rect x="188" y="86" width="11" height="11" fill="#f97316"/>
+  <rect x="201" y="86" width="11" height="11" fill="#f97316"/>
+
+  <!-- Swoosh -->
+  <path d="M40 160C40 160 80 110 200 110C320 110 360 140 360 140" stroke="#f97316" stroke-width="8" stroke-linecap="round" fill="none"/>
+  
+  <!-- Text TRADE CARE -->
+  <text x="50" y="160" font-family="Arial, sans-serif" font-weight="900" font-size="50" fill="#1a237e">TRADE CARE</text>
+  
+  <!-- Text CONSTRUCTION MAINTENANCE -->
+  <text x="60" y="185" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#f97316" letter-spacing="2">CONSTRUCTION MAINTENANCE</text>
+  
+  <!-- Plus Icon -->
+  <circle cx="370" cy="135" r="12" stroke="#1a237e" stroke-width="2" fill="none"/>
+  <path d="M370 127V143M362 135H378" stroke="#1a237e" stroke-width="4" stroke-linecap="round"/>
+</svg>
