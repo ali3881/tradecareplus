@@ -46,7 +46,7 @@ export default async function AdminUserDetailsPage({
             <p className="text-gray-500">{user.email}</p>
         </div>
         
-        <UserActions id={user.id} currentRole={user.role} />
+        <UserActions id={user.id} email={user.email} currentRole={user.role} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

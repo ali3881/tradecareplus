@@ -9,7 +9,8 @@ import {
   Shield, 
   LogOut, 
   LayoutDashboard, 
-  ChevronDown 
+  ChevronDown,
+  CreditCard
 } from "lucide-react";
 
 export default function UserMenu() {
@@ -126,6 +127,17 @@ export default function UserMenu() {
                   </Link>
                 )}
                 <Link 
+                    href="/manage-subscription" 
+                    className="flex items-center px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors group"
+                    role="menuitem"
+                    onClick={() => setIsOpen(false)}
+                >
+                    <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mr-3 group-hover:bg-emerald-100 transition-colors">
+                        <CreditCard size={16} />
+                    </div>
+                    Manage Subscription
+                </Link>
+                <Link 
                     href="/account" 
                     className="flex items-center px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors group"
                     role="menuitem"
@@ -136,17 +148,7 @@ export default function UserMenu() {
                     </div>
                     Account Settings
                 </Link>
-                <Link 
-                    href="/security" 
-                    className="flex items-center px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors group"
-                    role="menuitem"
-                    onClick={() => setIsOpen(false)}
-                >
-                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center mr-3 group-hover:bg-orange-100 transition-colors">
-                        <Shield size={16} />
-                    </div>
-                    Security
-                </Link>
+                
             </div>
 
             <div className="border-t border-gray-100 my-1"></div>

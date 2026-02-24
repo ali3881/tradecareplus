@@ -10,6 +10,9 @@ export default async function AdminSubscriptionsPage() {
   const subscriptions = await prisma.subscription.findMany({
     orderBy: { createdAt: "desc" },
     include: {
+      transactions: {
+        select: { id: true },
+      },
       user: {
         select: {
           id: true,

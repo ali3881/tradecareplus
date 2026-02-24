@@ -40,6 +40,7 @@ export default function SubscriptionList({ initialSubscriptions }: { initialSubs
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">User</th>
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Plan</th>
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Transactions</th>
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Created</th>
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
@@ -69,6 +70,9 @@ export default function SubscriptionList({ initialSubscriptions }: { initialSubs
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-600">
+                  {sub.transactions?.length || 0}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-600">
                   {new Date(sub.createdAt).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4">
@@ -89,7 +93,7 @@ export default function SubscriptionList({ initialSubscriptions }: { initialSubs
             ))}
             {subscriptions.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
+                <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                   No subscriptions found.
                 </td>
               </tr>

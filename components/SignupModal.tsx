@@ -2,7 +2,7 @@
 
 import { UserPlus, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -27,32 +27,63 @@ export default function SignupModal({ isOpen, onClose, initialPlan }: SignupModa
   }, [initialPlan, isOpen]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log("Signup submitted:", formData);
-    
-    // Simulate login by setting local storage
-    localStorage.setItem("user", JSON.stringify({ name: formData.name, email: formData.email }));
-    // Dispatch custom event to notify Header
-    window.dispatchEvent(new Event('userLoggedIn'));
+    setError("");
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    
-    // Reset success message and close after 3 seconds
-    setTimeout(() => {
-        setIsSuccess(false);
-        onClose();
-        // Redirect to dashboard or home if needed
-        // router.push('/dashboard');
-    }, 3000);
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const signupRes = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!signupRes.ok) {
+        const msg = await signupRes.text();
+        throw new Error(msg || "Signup failed");
+      }
+
+      const loginRes = await signIn("credentials", {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
+
+      if (!loginRes?.ok) {
+        throw new Error("Account created but sign-in failed. Please log in and subscribe.");
+      }
+
+      const checkoutRes = await fetch("/api/billing/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: formData.plan }),
+      });
+
+      if (!checkoutRes.ok) {
+        const msg = await checkoutRes.text();
+        throw new Error(msg || "Failed to start Stripe checkout");
+      }
+
+      const checkoutData = await checkoutRes.json();
+      if (!checkoutData?.url) {
+        throw new Error("Stripe checkout URL not returned");
+      }
+
+      window.location.href = checkoutData.url;
+    } catch (err: any) {
+      setError(err.message || "Signup failed");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -183,11 +214,7 @@ export default function SignupModal({ isOpen, onClose, initialPlan }: SignupModa
                 {isSubmitting ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
               </button>
               
-              {isSuccess && (
-                <div className="mt-4 p-4 bg-green-50 text-green-700 rounded border border-green-200 animate-fade-in text-sm text-center">
-                  Account created successfully! Welcome to TradeCarePlus.
-                </div>
-              )}
+              {error && <div className="mt-3 text-red-600 text-sm">{error}</div>}
             </form>
         </div>
       </div>

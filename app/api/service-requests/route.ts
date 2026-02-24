@@ -5,14 +5,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const createServiceRequestSchema = z.object({
-  type: z.enum([
-    "LEAKING_TAP",
-    "TOILET",
-    "MINOR_BLOCKAGE",
-    "HOT_WATER",
-    "GENERAL_MAINTENANCE",
-    "OTHER",
-  ]),
+  type: z.string().min(1).max(100),
   description: z.string().min(10, "Description must be at least 10 characters"),
   urgency: z.enum(["NORMAL", "URGENT", "EMERGENCY"]),
   afterHours: z.boolean(),
@@ -70,6 +63,18 @@ export async function POST(req: Request) {
     }
 
     const body = createServiceRequestSchema.parse(json);
+
+    const serviceType = await prisma.serviceType.findUnique({
+      where: { title: body.type.trim() },
+      select: { id: true },
+    });
+
+    if (!serviceType) {
+      return NextResponse.json(
+        { code: "VALIDATION_ERROR", message: "Invalid service type" },
+        { status: 422 }
+      );
+    }
 
     // Calculate Eligibility (Mock Logic)
     // In real app, check entitlement.includedVisitsRemaining > 0

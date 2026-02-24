@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/admin";
+import { requireAdminOrStaff } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
   try {
-    await requireAdmin();
+    const session = await requireAdminOrStaff();
+    const isStaff = session.user.role === "STAFF";
 
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
@@ -19,6 +20,7 @@ export async function GET(request: Request) {
     const where: any = {};
     if (status) where.status = status;
     if (urgency) where.urgency = urgency;
+    if (isStaff) where.assignedToId = session.user.id;
 
     const jobs = await prisma.serviceRequest.findMany({
       where,

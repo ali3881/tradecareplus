@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/admin";
+import { requireAdminOrStaff } from "@/lib/admin";
 import Link from "next/link";
 import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Download, PlayCircle, Phone, Mail } from "lucide-react";
 import JobActions from "./JobActions";
@@ -9,7 +9,8 @@ export default async function AdminJobDetailsPage({
 }: {
   params: { id: string };
 }) {
-  await requireAdmin();
+  const session = await requireAdminOrStaff();
+  const isAdmin = session.user.role === "ADMIN";
 
   const job = await prisma.serviceRequest.findUnique({
     where: { id: params.id },
@@ -29,11 +30,22 @@ export default async function AdminJobDetailsPage({
     );
   }
 
+  if (!isAdmin && job.assignedToId !== session.user.id) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">Unauthorized</h1>
+        <Link href="/admin/jobs" className="text-yellow-600 hover:underline">Back to Jobs</Link>
+      </div>
+    );
+  }
+
   // Fetch staff for assignment dropdown
-  const staff = await prisma.user.findMany({
-    where: { role: "STAFF" },
-    orderBy: { name: "asc" }
-  });
+  const staff = isAdmin
+    ? await prisma.user.findMany({
+        where: { role: "STAFF" },
+        orderBy: { name: "asc" },
+      })
+    : [];
 
   return (
     <div className="space-y-8">
@@ -58,7 +70,14 @@ export default async function AdminJobDetailsPage({
           </div>
         </div>
         
-        <JobActions id={job.id} currentStatus={job.status} currentAssignedTo={job.assignedToId} staffList={staff} />
+        <JobActions
+          id={job.id}
+          currentStatus={job.status}
+          currentAssignedTo={job.assignedToId}
+          staffList={staff}
+          canManageAssignment={isAdmin}
+          canDelete={isAdmin}
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -8,12 +8,16 @@ export default function JobActions({
   id, 
   currentStatus, 
   currentAssignedTo, 
-  staffList 
+  staffList,
+  canManageAssignment = true,
+  canDelete = true,
 }: { 
   id: string; 
   currentStatus: string;
   currentAssignedTo?: string | null;
   staffList?: any[];
+  canManageAssignment?: boolean;
+  canDelete?: boolean;
 }) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
@@ -27,10 +31,14 @@ export default function JobActions({
       const res = await fetch(`/api/admin/jobs/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          status, 
-          assignedToId: assignedTo || null 
-        }),
+        body: JSON.stringify(
+          canManageAssignment
+            ? {
+                status,
+                assignedToId: assignedTo || null,
+              }
+            : { status }
+        ),
       });
       if (res.ok) {
         router.refresh();
@@ -65,24 +73,28 @@ export default function JobActions({
     }
   };
 
-  const hasChanges = status !== currentStatus || assignedTo !== (currentAssignedTo || "");
+  const hasChanges =
+    status !== currentStatus ||
+    (canManageAssignment && assignedTo !== (currentAssignedTo || ""));
 
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
       <div className="flex flex-wrap items-center gap-2">
         {/* Staff Assignment */}
-        <select
-          value={assignedTo}
-          onChange={(e) => setAssignedTo(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer min-w-[150px]"
-        >
-          <option value="">Unassigned</option>
-          {staffList?.map((staff) => (
-            <option key={staff.id} value={staff.id}>
-              {staff.name}
-            </option>
-          ))}
-        </select>
+        {canManageAssignment && (
+          <select
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
+            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer min-w-[150px]"
+          >
+            <option value="">Unassigned</option>
+            {staffList?.map((staff) => (
+              <option key={staff.id} value={staff.id}>
+                {staff.name}
+              </option>
+            ))}
+          </select>
+        )}
 
         {/* Status */}
         <select
@@ -110,16 +122,20 @@ export default function JobActions({
         </button>
       </div>
 
-      <div className="hidden sm:block h-8 w-px bg-gray-200 mx-2"></div>
+      {canDelete && (
+        <>
+          <div className="hidden sm:block h-8 w-px bg-gray-200 mx-2"></div>
 
-      <button
-        onClick={handleDelete}
-        disabled={deleting}
-        className="flex items-center space-x-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors border border-red-100 whitespace-nowrap"
-      >
-        {deleting ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
-        <span className="text-sm font-medium">Delete Job</span>
-      </button>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="flex items-center space-x-2 px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors border border-red-100 whitespace-nowrap"
+          >
+            {deleting ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
+            <span className="text-sm font-medium">Delete Job</span>
+          </button>
+        </>
+      )}
     </div>
   );
 }

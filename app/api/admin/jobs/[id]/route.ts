@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/admin";
+import { requireAdminOrStaff } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -9,7 +9,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAdmin();
+    const session = await requireAdminOrStaff();
+    const isAdmin = session.user.role === "ADMIN";
 
     const job = await prisma.serviceRequest.findUnique({
       where: { id: params.id },
@@ -21,6 +22,9 @@ export async function GET(
 
     if (!job) {
       return NextResponse.json({ error: "Job not found" }, { status: 404 });
+    }
+    if (!isAdmin && job.assignedToId !== session.user.id) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     return NextResponse.json(job);
@@ -35,7 +39,10 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAdmin();
+    const session = await requireAdminOrStaff();
+    if (session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     const job = await prisma.serviceRequest.findUnique({
       where: { id: params.id },
@@ -61,13 +68,27 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    await requireAdmin();
+    const session = await requireAdminOrStaff();
+    const isAdmin = session.user.role === "ADMIN";
     const body = await request.json();
     const { status, assignedToId } = body;
 
+    const existingJob = await prisma.serviceRequest.findUnique({
+      where: { id: params.id },
+      select: { id: true, assignedToId: true },
+    });
+
+    if (!existingJob) {
+      return NextResponse.json({ error: "Job not found" }, { status: 404 });
+    }
+
+    if (!isAdmin && existingJob.assignedToId !== session.user.id) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const data: any = {};
     if (status) data.status = status;
-    if (assignedToId !== undefined) data.assignedToId = assignedToId;
+    if (isAdmin && assignedToId !== undefined) data.assignedToId = assignedToId;
 
     const job = await prisma.serviceRequest.update({
       where: { id: params.id },

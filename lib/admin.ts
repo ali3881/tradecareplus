@@ -12,6 +12,17 @@ export async function requireAdmin() {
   return session;
 }
 
+export async function requireAdminOrStaff() {
+  const session = await getServerSession(authOptions);
+  const role = session?.user?.role;
+
+  if (!session || (role !== "ADMIN" && role !== "STAFF")) {
+    redirect("/");
+  }
+
+  return session;
+}
+
 export async function isAdmin() {
   const session = await getServerSession(authOptions);
   return session?.user?.role === "ADMIN";

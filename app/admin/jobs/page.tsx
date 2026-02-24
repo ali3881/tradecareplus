@@ -1,14 +1,15 @@
 import { prisma } from "@/lib/prisma";
-import { requireAdmin } from "@/lib/admin";
+import { requireAdminOrStaff } from "@/lib/admin";
 import Link from "next/link";
-import { Search, Filter, Eye } from "lucide-react";
+import { Filter, Eye } from "lucide-react";
 
 export default async function AdminJobsPage({
   searchParams,
 }: {
   searchParams: { status?: string; urgency?: string; page?: string };
 }) {
-  await requireAdmin();
+  const session = await requireAdminOrStaff();
+  const isStaff = session.user.role === "STAFF";
 
   const status = searchParams.status || "";
   const urgency = searchParams.urgency || "";
@@ -19,6 +20,7 @@ export default async function AdminJobsPage({
   const where: any = {};
   if (status) where.status = status;
   if (urgency) where.urgency = urgency;
+  if (isStaff) where.assignedToId = session.user.id;
 
   const jobs = await prisma.serviceRequest.findMany({
     where,
@@ -40,7 +42,7 @@ export default async function AdminJobsPage({
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-800">Service Requests</h1>
+        <h1 className="text-2xl font-bold text-gray-800">{isStaff ? "My Assigned Jobs" : "Service Requests"}</h1>
         
         <form className="flex flex-wrap items-center gap-2">
           <div className="relative">

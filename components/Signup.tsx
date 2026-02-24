@@ -9,6 +9,9 @@ export default function Signup() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan");
+  const packageIdParam = searchParams.get("packageId");
+  const [packageOptions, setPackageOptions] = useState<{ id: string; title: string; price: number; currency: string; duration: string }[]>([]);
+  const formatDuration = (duration: string) => duration.replace(/^1\s+/i, "");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -25,8 +28,25 @@ export default function Signup() {
     }
   }, [planParam]);
 
+  useEffect(() => {
+    const loadPackages = async () => {
+      try {
+        const res = await fetch("/api/packages", { cache: "no-store" });
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setPackageOptions(data);
+          if (!planParam && data.length > 0) {
+            setFormData((prev) => ({ ...prev, plan: data[0].title }));
+          }
+        }
+      } catch (e) {
+        // Keep signup usable even if packages fail to load.
+      }
+    };
+    loadPackages();
+  }, [planParam]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,8 +73,6 @@ export default function Signup() {
         throw new Error(msg || "Signup failed");
       }
 
-      setIsSuccess(true);
-      
       // 2. Sign In
       const signInRes = await signIn("credentials", {
         email: formData.email,
@@ -62,11 +80,28 @@ export default function Signup() {
         redirect: false,
       });
 
-      if (signInRes?.ok) {
-        router.push("/dashboard");
-      } else {
-        router.push("/login");
+      if (!signInRes?.ok) {
+        throw new Error("Account created but sign-in failed. Please log in and subscribe.");
       }
+
+      // 3. Redirect to Stripe checkout for selected plan
+      const checkoutRes = await fetch("/api/billing/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: formData.plan, packageId: packageIdParam }),
+      });
+
+      if (!checkoutRes.ok) {
+        const msg = await checkoutRes.text();
+        throw new Error(msg || "Failed to start Stripe checkout");
+      }
+
+      const checkoutData = await checkoutRes.json();
+      if (!checkoutData?.url) {
+        throw new Error("Stripe checkout URL not returned");
+      }
+
+      window.location.href = checkoutData.url;
 
     } catch (err: any) {
       console.error(err);
@@ -138,9 +173,11 @@ export default function Signup() {
                   className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 appearance-none cursor-pointer transition-colors text-gray-500"
                 >
                   <option value="">Select a Plan</option>
-                  <option value="BASIC">BASIC - $25/month</option>
-                  <option value="STANDARD">STANDARD - $59/month</option>
-                  <option value="PREMIUM">PREMIUM - $89/month</option>
+                  {packageOptions.map((pkg) => (
+                    <option key={pkg.id} value={pkg.title}>
+                      {pkg.title} - {pkg.currency === "USD" ? "$" : `${pkg.currency} `}{pkg.price}/{formatDuration(pkg.duration)}
+                    </option>
+                  ))}
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -180,11 +217,6 @@ export default function Signup() {
                 {isSubmitting ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
               </button>
               
-              {isSuccess && (
-                <div className="mt-4 p-4 bg-green-50 text-green-700 rounded border border-green-200 animate-fade-in">
-                  Account created successfully! Redirecting...
-                </div>
-              )}
             </form>
           </div>
 

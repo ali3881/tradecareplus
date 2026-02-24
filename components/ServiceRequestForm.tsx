@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Upload, X, FileVideo, Image as ImageIcon, Trash2, Loader2 } from "lucide-react";
 import { parseResponse } from "@/lib/http";
 
@@ -19,8 +19,10 @@ interface ServiceRequestFormProps {
 }
 
 export default function ServiceRequestForm({ onClose, onSuccess }: ServiceRequestFormProps) {
+  const [serviceTypes, setServiceTypes] = useState<{ id: string; title: string }[]>([]);
+  const [typesLoading, setTypesLoading] = useState(true);
   const [formData, setFormData] = useState({
-    type: "LEAKING_TAP",
+    type: "",
     description: "",
     urgency: "NORMAL",
     afterHours: false,
@@ -28,8 +30,30 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
     preferredContactMethod: "CALL",
   });
   const [files, setFiles] = useState<FilePreview[]>([]);
+  const [isDragActive, setIsDragActive] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadServiceTypes = async () => {
+      try {
+        const res = await fetch("/api/service-types", { cache: "no-store" });
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setServiceTypes(data);
+          if (data.length > 0) {
+            setFormData((prev) => ({ ...prev, type: data[0].title }));
+          }
+        }
+      } catch (e) {
+        setError("Failed to load service types");
+      } finally {
+        setTypesLoading(false);
+      }
+    };
+
+    loadServiceTypes();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -41,23 +65,54 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
     }
   };
 
+  const addFiles = (incomingFiles: File[]) => {
+    const newFiles = incomingFiles.map((file) => ({
+      file,
+      previewUrl: URL.createObjectURL(file),
+      progress: 0,
+      status: "pending" as const,
+    }));
+
+    if (files.length + newFiles.length > 5) {
+      alert("You can only upload up to 5 files.");
+      return;
+    }
+
+    setFiles((prev) => [...prev, ...newFiles]);
+  };
+
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files).map(file => ({
-        file,
-        previewUrl: URL.createObjectURL(file),
-        progress: 0,
-        status: 'pending' as const
-      }));
-      
-      // Validate limits (max 5 files total)
-      if (files.length + newFiles.length > 5) {
-          alert("You can only upload up to 5 files.");
-          return;
-      }
-
-      setFiles(prev => [...prev, ...newFiles]);
+      addFiles(Array.from(e.target.files));
+      e.target.value = "";
     }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+
+    const droppedFiles = Array.from(e.dataTransfer.files || []).filter(
+      (file) => file.type.startsWith("image/") || file.type.startsWith("video/")
+    );
+    if (droppedFiles.length === 0) {
+      alert("Please drop image or video files only.");
+      return;
+    }
+    addFiles(droppedFiles);
   };
 
   const removeFile = (index: number) => {
@@ -189,9 +244,11 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
     setError("");
 
     try {
+      if (!formData.type) {
+        throw new Error("Please select a service type");
+      }
+
       // 1. Upload all pending files
-      const attachmentKeys: string[] = [];
-      
       // Filter out files that are already completed (if we were to support re-submission, but here we just upload pending)
       // Actually we need to upload all 'pending' files. 'completed' ones already have keys.
       
@@ -216,10 +273,10 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
       const parsed = await parseResponse(res);
 
       if (!parsed.ok) {
-          if (parsed.data?.issues && Array.isArray(parsed.data.issues)) {
-              throw new Error(parsed.data.issues.map((err: any) => err.message).join(", "));
+          if (parsed.json?.issues && Array.isArray(parsed.json.issues)) {
+              throw new Error(parsed.json.issues.map((err: any) => err.message).join(", "));
           }
-          throw new Error(parsed.data?.message || parsed.text || "Failed to submit request");
+          throw new Error(parsed.json?.message || parsed.text || "Failed to submit request");
       }
 
       if (onSuccess) onSuccess();
@@ -234,10 +291,17 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
   };
 
   return (
-    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <div className="sm:flex sm:items-start">
-        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title">
+    <div className="bg-white px-4 pt-10 pb-4 sm:p-6 relative">
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute right-4 top-4 p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+        <div className="w-full">
+            <h3 className="text-lg leading-6 font-semibold text-gray-900 mb-4" id="modal-title">
             Log a Job
             </h3>
             
@@ -254,14 +318,14 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
                 name="type" 
                 value={formData.type} 
                 onChange={handleChange}
+                disabled={typesLoading || serviceTypes.length === 0}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 >
-                <option value="LEAKING_TAP">Leaking Tap</option>
-                <option value="TOILET">Toilet Issue</option>
-                <option value="MINOR_BLOCKAGE">Minor Blockage</option>
-                <option value="HOT_WATER">Hot Water System</option>
-                <option value="GENERAL_MAINTENANCE">General Maintenance</option>
-                <option value="OTHER">Other</option>
+                {serviceTypes.map((type) => (
+                  <option key={type.id} value={type.title}>
+                    {type.title}
+                  </option>
+                ))}
                 </select>
             </div>
 
@@ -293,7 +357,14 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
 
             <div>
                 <label className="block text-sm font-medium text-gray-700">Attachments (Photos / Videos)</label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-yellow-500 transition-colors cursor-pointer relative">
+                <div
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md transition-colors cursor-pointer relative ${
+                      isDragActive ? "border-yellow-500 bg-yellow-50" : "border-gray-300 hover:border-yellow-500"
+                    }`}
+                >
                     <div className="space-y-1 text-center">
                         <Upload className="mx-auto h-12 w-12 text-gray-400" />
                         <div className="flex text-sm text-gray-600">
@@ -304,6 +375,7 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
                             <p className="pl-1">or drag and drop</p>
                         </div>
                         <p className="text-xs text-gray-500">PNG, JPG, MP4 up to 10MB (Img) / 100MB (Vid)</p>
+                        {isDragActive && <p className="text-xs text-yellow-700 font-medium">Drop files here</p>}
                     </div>
                 </div>
                 
@@ -394,7 +466,6 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
                 </button>
             </div>
             </form>
-        </div>
         </div>
     </div>
   );

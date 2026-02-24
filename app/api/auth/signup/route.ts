@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       return new NextResponse(errorMsg, { status: 400 });
     }
 
-    const { name, email, password, phone, plan } = body.data;
+    const { name, email, password, phone } = body.data;
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // Create user with active subscription (MOCK)
+    // Create user only; subscription is created after Stripe checkout webhook confirms payment.
     const user = await prisma.user.create({
       data: {
         name,
@@ -43,22 +43,6 @@ export async function POST(req: Request) {
         passwordHash,
         phone,
         role: "USER",
-        subscription: {
-          create: {
-            stripeCustomerId: `cus_${Math.random().toString(36).substring(7)}`,
-            stripeSubscriptionId: `sub_${Math.random().toString(36).substring(7)}`,
-            plan: plan,
-            status: "ACTIVE",
-            currentPeriodStart: new Date(),
-            currentPeriodEnd: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-          },
-        },
-        entitlement: {
-            create: {
-                year: new Date().getFullYear(),
-                includedVisitsRemaining: plan === 'PREMIUM' ? 3 : plan === 'STANDARD' ? 1 : 0
-            }
-        }
       },
     });
 

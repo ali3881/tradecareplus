@@ -32,6 +32,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
+      
         const isValid = await bcrypt.compare(
           credentials.password,
           user.passwordHash

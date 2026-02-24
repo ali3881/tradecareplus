@@ -14,6 +14,22 @@ export default async function AdminReportsPage() {
   });
 
   const totalJobs = jobStats.reduce((acc, curr) => acc + curr._count.id, 0);
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+  const revenueAgg = await prisma.transaction.aggregate({
+    _sum: {
+      amount: true,
+    },
+    where: {
+      status: "PAID",
+      createdAt: {
+        gte: monthStart,
+      },
+    },
+  });
+
+  const estimatedRevenue = (revenueAgg._sum.amount || 0) / 100;
 
   return (
     <div className="space-y-8">
@@ -51,8 +67,10 @@ export default async function AdminReportsPage() {
                  <h3 className="font-bold text-gray-700">Estimated Revenue</h3>
                  <DollarSign className="text-yellow-500" />
              </div>
-             <div className="text-3xl font-bold text-gray-900">$12,450</div>
-             <p className="text-sm text-gray-500 mt-1">This month (projection)</p>
+             <div className="text-3xl font-bold text-gray-900">
+               ${estimatedRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+             </div>
+             <p className="text-sm text-gray-500 mt-1">This month (paid transactions)</p>
           </div>
       </div>
 

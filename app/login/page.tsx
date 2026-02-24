@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -34,7 +34,9 @@ export default function Login() {
       }
       setIsSubmitting(false);
     } else {
-      router.push("/dashboard");
+      const session = await getSession();
+      const role = (session?.user as any)?.role;
+      router.push(role === "ADMIN" ? "/admin" : role === "STAFF" ? "/admin/jobs" : "/dashboard");
       router.refresh();
     }
   };

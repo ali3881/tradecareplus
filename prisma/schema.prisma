@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,157 +8,189 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  passwordHash  String?
-  phone         String?
-  image         String?
-  role          String    @default("USER") // Role
-  isActive      Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  subscription  Subscription?
-  entitlement   Entitlement?
-  
-  chatThreads   ChatThread[]
-  messages      ChatMessage[]
-  videoRooms    VideoRoom[]
+  id              String           @id @default(cuid())
+  name            String?
+  email           String           @unique
+  passwordHash    String?
+  phone           String?
+  image           String?
+  role            String           @default("USER")
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  auditLogs       AuditLog[]
+  messages        ChatMessage[]
+  chatThreads     ChatThread[]
+  entitlement     Entitlement?
+  fileAssets      FileAsset[]
+  assignedJobs    ServiceRequest[] @relation("AssignedJobs")
   serviceRequests ServiceRequest[]
-  auditLogs     AuditLog[]
-  fileAssets    FileAsset[]
-  assignedJobs  ServiceRequest[] @relation("AssignedJobs")
+  subscription    Subscription?
+  transactions    Transaction[]
+  videoRooms      VideoRoom[]
 }
 
 model Subscription {
-  id                   String             @id @default(cuid())
-  userId               String             @unique
-  stripeCustomerId     String             @unique
-  stripeSubscriptionId String             @unique
-  plan                 String             // Plan
-  status               String             // SubscriptionStatus
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  stripeCustomerId     String   @unique
+  stripeSubscriptionId String   @unique
+  plan                 String
+  status               String
   currentPeriodStart   DateTime
   currentPeriodEnd     DateTime
-  cancelAtPeriodEnd    Boolean            @default(false)
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  cancelAtPeriodEnd    Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions         Transaction[]
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Transaction {
+  id               String        @id @default(cuid())
+  userId           String
+  subscriptionId   String?
+  stripeInvoiceId  String?       @unique
+  stripePaymentId  String?
+  amount           Int
+  currency         String
+  status           String
+  description      String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription     Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
 }
 
 model Entitlement {
-  id                        String   @id @default(cuid())
-  userId                    String   @unique
-  year                      Int      // e.g., 2024
-  includedVisitsRemaining   Int      @default(0)
-  cctvDueAt                 DateTime?
-  jetBlastDueAt             DateTime?
-  hotWaterInspectionDueAt   DateTime?
-  lastChecklistSentAt       DateTime?
-  updatedAt                 DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                      String    @id @default(cuid())
+  userId                  String    @unique
+  year                    Int
+  includedVisitsRemaining Int       @default(0)
+  cctvDueAt               DateTime?
+  jetBlastDueAt           DateTime?
+  hotWaterInspectionDueAt DateTime?
+  lastChecklistSentAt     DateTime?
+  updatedAt               DateTime  @updatedAt
+  user                    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ChatThread {
-  id        String       @id @default(cuid())
+  id        String        @id @default(cuid())
   userId    String
-  status    String       @default("OPEN") // ThreadStatus
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-
-  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages ChatMessage[]
-  assets   FileAsset[]
+  status    String        @default("OPEN")
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messages  ChatMessage[]
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assets    FileAsset[]
 }
 
 model ChatMessage {
-  id              String     @id @default(cuid())
+  id              String      @id @default(cuid())
   threadId        String
-  sender          String     // ChatSender
-  senderId        String?    // If sent by specific user/staff
+  sender          String
+  senderId        String?
   text            String
-  attachmentsJson String?    // JSON array of file URLs
-  createdAt       DateTime   @default(now())
-
-  thread   ChatThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
-  user     User?      @relation(fields: [senderId], references: [id])
-  assets   FileAsset[]
+  attachmentsJson String?
+  createdAt       DateTime    @default(now())
+  user            User?       @relation(fields: [senderId], references: [id])
+  thread          ChatThread  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  assets          FileAsset[]
 }
 
 model FileAsset {
-  id        String   @id @default(cuid())
-  userId    String
-  threadId  String?
-  messageId String?
+  id               String          @id @default(cuid())
+  userId           String
+  threadId         String?
+  messageId        String?
   serviceRequestId String?
-  key       String   @unique // S3 key
-  url       String   // Public URL
-  mime      String
-  size      Int
-  createdAt DateTime @default(now())
-
-  user    User        @relation(fields: [userId], references: [id])
-  thread  ChatThread? @relation(fields: [threadId], references: [id])
-  message ChatMessage? @relation(fields: [messageId], references: [id])
-  serviceRequest ServiceRequest? @relation(fields: [serviceRequestId], references: [id])
+  key              String          @unique
+  url              String
+  mime             String
+  size             Int
+  createdAt        DateTime        @default(now())
+  serviceRequest   ServiceRequest? @relation(fields: [serviceRequestId], references: [id])
+  message          ChatMessage?    @relation(fields: [messageId], references: [id])
+  thread           ChatThread?     @relation(fields: [threadId], references: [id])
+  user             User            @relation(fields: [userId], references: [id])
 }
 
 model VideoRoom {
-  id        String          @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  provider  String          @default("DAILY") // VideoProvider
-  roomId    String          // Provider's room ID
+  provider  String    @default("DAILY")
+  roomId    String
   roomUrl   String
-  status    String          @default("ACTIVE") // VideoRoomStatus
-  createdAt DateTime        @default(now())
+  status    String    @default("ACTIVE")
+  createdAt DateTime  @default(now())
   endedAt   DateTime?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ServiceRequest {
-  id                String            @id @default(cuid())
-  userId            String
-  type              String            // ServiceRequestType
-  description       String
-  locationText      String?
-  preferredContactMethod String @default("CALL") // ContactMethod
-  photosJson        String?           // JSON array of S3 keys
-  urgency           String            @default("NORMAL") // Urgency
-  afterHours        Boolean           @default(false)
-  eligibilityStatus String            // EligibilityStatus
-  discountPercent   Float             @default(0)
-  includedReason    String?
-  quoteReason       String?
-  status            String            @default("NEW") // ServiceRequestStatus
-  notesJson         String?           // JSON for staff notes
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  attachments FileAsset[]
-  
-  assignedToId String?
-  assignedTo   User?   @relation("AssignedJobs", fields: [assignedToId], references: [id])
+  id                     String      @id @default(cuid())
+  userId                 String
+  type                   String
+  description            String
+  locationText           String?
+  preferredContactMethod String      @default("CALL")
+  photosJson             String?
+  urgency                String      @default("NORMAL")
+  afterHours             Boolean     @default(false)
+  eligibilityStatus      String
+  discountPercent        Float       @default(0)
+  includedReason         String?
+  quoteReason            String?
+  status                 String      @default("NEW")
+  notesJson              String?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+  assignedToId           String?
+  attachments            FileAsset[]
+  assignedTo             User?       @relation("AssignedJobs", fields: [assignedToId], references: [id])
+  user                   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model AuditLog {
   id        String   @id @default(cuid())
   userId    String?
   action    String
-  metaJson  String?  // JSON details
+  metaJson  String?
   createdAt DateTime @default(now())
-
-  user User? @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 model SystemSetting {
   id        String   @id @default(cuid())
   key       String   @unique
   value     String
-  type      String   @default("STRING") // STRING, BOOLEAN, JSON
+  type      String   @default("STRING")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ServiceType {
+  id        String   @id @default(cuid())
+  title     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SubscriptionPackage {
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  price         Float
+  currency      String   @default("USD")
+  duration      String
+  featuresJson  String
+  isMostPopular Boolean  @default(false)
+  stripePriceId String?
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("Package")
 }
