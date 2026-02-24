@@ -31,7 +31,6 @@ export default async function EditPackagePage({ params }: { params: { id: string
         duration: pkg.duration,
         features,
         isMostPopular: pkg.isMostPopular,
-        stripePriceId: pkg.stripePriceId,
         isActive: pkg.isActive,
       }}
     />

@@ -29,7 +29,7 @@ export async function GET(req: Request) {
   } else if (sub?.plan === "PREMIUM") {
     showFallback = true;
     reason = "Premium members have 24/7 emergency access.";
-  } else if (sub.plan === "STANDARD") {
+  } else if (sub?.plan === "STANDARD") {
     // Check if minor blocked drain or just allow standard fallback for certain things
     showFallback = true;
     reason = "Standard members have 24/7 minor blockage access.";
