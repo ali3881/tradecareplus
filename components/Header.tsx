@@ -99,6 +99,8 @@ export default function Header() {
             <span className="text-black/20 text-xs">/</span>
             <Link href="/services" className="hover:text-white transition-colors h-full flex items-center px-4">Services</Link>
             <span className="text-black/20 text-xs">/</span>
+            <Link href="/sales-hire" className="hover:text-white transition-colors h-full flex items-center px-4">Sales & Hire</Link>
+            <span className="text-black/20 text-xs">/</span>
             <Link href="/projects" className="hover:text-white transition-colors h-full flex items-center px-4">Projects</Link>
             <span className="text-black/20 text-xs">/</span>
             <Link href="/packages" className="hover:text-white transition-colors h-full flex items-center px-4">Packages</Link>
@@ -125,6 +127,7 @@ export default function Header() {
             <Link href="/" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/about" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>About</Link>
             <Link href="/services" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Services</Link>
+            <Link href="/sales-hire" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Sales & Hire</Link>
             <Link href="/projects" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Projects</Link>
             <Link href="/packages" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Packages</Link>
             <Link href="/contact" className="hover:text-yellow-500" onClick={() => setIsMenuOpen(false)}>Contact</Link>

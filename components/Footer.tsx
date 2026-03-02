@@ -35,6 +35,7 @@ export default function Footer() {
               <li><Link href="/" className="hover:text-yellow-500 transition-colors">Home</Link></li>
               <li><Link href="/about" className="hover:text-yellow-500 transition-colors">About Us</Link></li>
               <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Services</Link></li>
+              <li><Link href="/sales-hire" className="hover:text-yellow-500 transition-colors">Sales and Hire</Link></li>
               <li><Link href="/projects" className="hover:text-yellow-500 transition-colors">Projects</Link></li>
               <li><Link href="/contact" className="hover:text-yellow-500 transition-colors">Contact Us</Link></li>
             </ul>
@@ -46,9 +47,9 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-400">
               <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Plumbing</Link></li>
               <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Electrical</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Renovation</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Flooring</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Painting</Link></li>
+              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Aircon & HVAC</Link></li>
+              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Property Maintenance</Link></li>
+              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Renovations</Link></li>
             </ul>
           </div>
 

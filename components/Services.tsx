@@ -1,4 +1,4 @@
-import { Wrench, Lightbulb, Droplets, Paintbrush, Hammer, Home } from "lucide-react";
+import { Wrench, Lightbulb, Droplets, Building2, AirVent, Hammer, Home, Clock3 } from "lucide-react";
 
 const services = [
   {
@@ -12,24 +12,34 @@ const services = [
     description: "Safe and reliable electrical work including wiring, lighting installation, and troubleshooting."
   },
   {
-    icon: <Hammer size={48} className="text-yellow-500" />,
-    title: "Flooring",
-    description: "Quality flooring installation and repair. From hardwood to tile, we enhance your home's foundation."
+    icon: <AirVent size={48} className="text-yellow-500" />,
+    title: "Aircon & HVAC",
+    description: "Installation, servicing, and repair for air conditioning and HVAC systems for homes and facilities."
   },
   {
-    icon: <Paintbrush size={48} className="text-yellow-500" />,
-    title: "Painting",
-    description: "Interior and exterior painting services to refresh your home's look with vibrant colors."
+    icon: <Building2 size={48} className="text-yellow-500" />,
+    title: "Building",
+    description: "General building and trade facilities support, from structural fixes to ongoing site work."
   },
   {
     icon: <Home size={48} className="text-yellow-500" />,
-    title: "Renovation",
+    title: "Renovations",
     description: "Complete home renovation services to transform your living space into your dream home."
   },
   {
     icon: <Wrench size={48} className="text-yellow-500" />,
-    title: "Lighting",
-    description: "Custom lighting solutions to brighten up your home and create the perfect ambiance."
+    title: "Property Maintenance",
+    description: "Scheduled and reactive maintenance for residential and commercial properties."
+  },
+  {
+    icon: <Hammer size={48} className="text-yellow-500" />,
+    title: "All Trade Facilities",
+    description: "Multi-trade coordination under one team to manage complete end-to-end trade requirements."
+  },
+  {
+    icon: <Clock3 size={48} className="text-yellow-500" />,
+    title: "24/7 Emergency Service",
+    description: "Round-the-clock rapid response for urgent plumbing, electrical, HVAC, and maintenance callouts."
   }
 ];
 
@@ -44,7 +54,7 @@ export default function Services() {
           <h2 className="text-4xl font-bold text-gray-900 mb-4">What We Have Done</h2>
           <div className="w-20 h-1 bg-yellow-500 mx-auto rounded"></div>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            We offer a wide range of professional home maintenance and renovation services. From minor repairs to major overhauls, we have the expertise to get the job done right.
+            We cover building, plumbing, aircon/HVAC, electrical, property maintenance, and renovations with 24/7 availability.
           </p>
         </div>
 
