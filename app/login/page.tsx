@@ -4,7 +4,7 @@ import { getSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Wrench } from "lucide-react";
+import { Wrench, Mail, Lock, ArrowRight } from "lucide-react";
 
 export default function Login() {
   const router = useRouter();
@@ -25,12 +25,10 @@ export default function Login() {
     });
 
     if (res?.error) {
-      // NextAuth returns 200 OK even on credentials failure, but with an error field.
-      // Check for specific error string or generic "CredentialsSignin"
       if (res.status === 401 || res.error === "CredentialsSignin") {
-         setError("Invalid email or password");
+        setError("Invalid email or password");
       } else {
-         setError("An error occurred. Please try again.");
+        setError("An error occurred. Please try again.");
       }
       setIsSubmitting(false);
     } else {
@@ -42,77 +40,138 @@ export default function Login() {
   };
 
   return (
-    <div className="flex-grow bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-            <Wrench className="text-yellow-500 w-12 h-12" />
+    <main className="flex-grow bg-white">
+      <div className="bg-gray-900 text-white py-16 pt-20">
+        <div className="font-alt max-w-[1290px] mx-auto px-6 flex justify-between items-center">
+          <h1 className="text-4xl font-semibold">Login</h1>
+          <div className="flex items-center text-md">
+            <Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
+            <span className="mx-2 text-gray-600">/</span>
+            <span className="text-yellow-500">Login</span>
+          </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{" "}
-          <Link href="/signup" className="font-medium text-yellow-600 hover:text-yellow-500">
-            create a new account
-          </Link>
-        </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                />
+      <section className="bg-[#f7f7f7] py-14 md:py-20">
+        <div className="max-w-[1290px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+            <div className="hidden lg:flex relative overflow-hidden rounded-md bg-black text-white p-10">
+              <div
+                className="absolute inset-0 bg-[url('https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/intro-section-pattern.png')] bg-repeat opacity-20"
+                aria-hidden="true"
+              />
+              <div className="relative z-10 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex items-center justify-center h-11 w-11 bg-yellow-400 text-black rounded-sm">
+                    <Wrench className="h-6 w-6" />
+                  </div>
+                  <h2 className="font-alt mt-6 text-4xl leading-tight font-bold">
+                    Welcome Back
+                  </h2>
+                  <p className="mt-5 text-white/80 max-w-md leading-relaxed">
+                    Sign in to manage your dashboard, subscriptions, and account settings with the same TradeCarePlus experience.
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 text-yellow-400 font-semibold">
+                  <span>Professional Home Services</span>
+                  <ArrowRight className="h-4 w-4" />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
-                />
+            <div className="bg-white rounded-md border border-black/10 shadow-[0_14px_40px_rgba(0,0,0,0.08)] p-6 sm:p-8 md:p-10">
+              <div className="mb-10 text-left">
+                <div className="relative inline-block border border-[#e7c76a] px-10 pt-8 pb-6">
+                  <div className="absolute -top-6 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-white">
+                    <Lock className="h-5 w-5 text-yellow-400" strokeWidth={2.2} />
+                  </div>
+
+                  <h2 className="text-3xl sm:text-4xl font-alt font-extrabold uppercase leading-none tracking-tight text-black">
+                    Sign In
+                  </h2>
+
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white w-max px-3">
+                    <span className="text-xs font-alt font-bold uppercase tracking-[2px] text-red-500">
+                      Access Account
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {error && (
-              <div className="text-red-600 text-sm">{error}</div>
-            )}
+              <p className="mb-6 text-sm text-gray-600">
+                Enter your details to continue. Need an account?{" "}
+                <Link href="/signup" className="font-semibold text-yellow-600 hover:text-red-600 transition-colors">
+                  Create one
+                </Link>
+                .
+              </p>
 
-            <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 ${isSubmitting ? 'opacity-50' : ''}`}
-              >
-                {isSubmitting ? "Signing in..." : "Sign in"}
-              </button>
+              <form className="space-y-5" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="email" className="mb-2 block text-sm font-semibold text-gray-700">
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <Mail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="block w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="mb-2 block text-sm font-semibold text-gray-700">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="block w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+                </div>
+
+                {error ? (
+                  <div className="rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                    {error}
+                  </div>
+                ) : null}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`inline-flex w-full items-center justify-center rounded bg-yellow-400 px-6 py-3 text-sm font-bold uppercase text-black transition-colors hover:bg-yellow-500 ${isSubmitting ? "cursor-not-allowed opacity-70" : ""}`}
+                >
+                  {isSubmitting ? "Signing In..." : "Sign In"}
+                </button>
+              </form>
             </div>
-          </form>
+          </div>
+
+          <p className="mt-6 text-center text-sm text-gray-500 lg:hidden">
+            New here?{" "}
+            <Link href="/signup" className="font-semibold text-yellow-600 hover:text-red-600 transition-colors">
+              Create an account
+            </Link>
+          </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

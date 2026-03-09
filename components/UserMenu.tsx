@@ -13,10 +13,15 @@ import {
   CreditCard
 } from "lucide-react";
 
-export default function UserMenu() {
+type UserMenuProps = {
+  variant?: "dark" | "light";
+};
+
+export default function UserMenu({ variant = "dark" }: UserMenuProps) {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isLight = variant === "light";
 
   // Close on click outside
   useEffect(() => {
@@ -41,17 +46,20 @@ export default function UserMenu() {
   }, []);
 
   if (status === "loading") {
-    return <div className="h-8 w-20 bg-gray-800 animate-pulse rounded"></div>;
+    return <div className={`h-8 w-20 animate-pulse rounded ${isLight ? "bg-black/10" : "bg-gray-800"}`}></div>;
   }
 
   if (!session?.user) {
     return (
-      <Link 
-        href="/login" 
-        className="flex items-center space-x-2 text-yellow-500 hover:text-white transition-colors font-bold"
+     <Link
+        href="/login"
+        className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200
+        ${isLight
+          ? "text-black border border-gray-800 hover:bg-red-600 hover:text-white hover:border-red-600"
+          : "text-yellow-400 border border-yellow-400/40 hover:bg-yellow-400 hover:text-black"}
+        `}
       >
-        <User size={14} />
-        <span>SIGN IN</span>
+        <User size={18} />
       </Link>
     );
   }
@@ -66,7 +74,9 @@ export default function UserMenu() {
       {/* Trigger */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 text-yellow-500 hover:text-white transition-colors font-bold outline-none focus:ring-2 focus:ring-yellow-500 rounded px-2 py-1"
+        className={`flex items-center space-x-2 transition-colors font-bold outline-none focus:ring-2 focus:ring-yellow-500 rounded px-2 py-1 ${
+          isLight ? "text-black hover:text-red-600" : "text-yellow-500 hover:text-white"
+        }`}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -74,7 +84,7 @@ export default function UserMenu() {
             <div className="w-6 h-6 rounded-full bg-yellow-600 text-white flex items-center justify-center text-xs">
                 {initials}
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black"></div>
+            <div className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 ${isLight ? "border-white" : "border-black"}`}></div>
         </div>
         <span className="max-w-[100px] truncate">{user.name || "User"}</span>
         <ChevronDown size={14} className={`transform transition-transform ${isOpen ? "rotate-180" : ""}`} />

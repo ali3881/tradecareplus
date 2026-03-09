@@ -1,82 +1,255 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Twitter, Globe, Linkedin, Circle } from "lucide-react";
+
+const usefulLinks = [
+  { label: "About Us", href: "/about" },
+  { label: "Our Packages", href: "/packages" },
+  { label: "Services", href: "/services" },
+  { label: "Our Projects", href: "/projects" },
+  { label: "Sales and Hire", href: "/sales-hire" },
+  { label: "Contact", href: "/contact" },
+];
+
+const openingHours = [
+  "Monday - 9:00AM to 6:00PM",
+  "Tuesday - 9:00AM to 6:00PM",
+  "Wednesday - 9:00AM to 6:00PM",
+  "Thursday - 9:00AM to 6:00PM",
+  "Friday - 9:00AM to 6:00PM",
+  "Saturday - 9:00AM to 6:00PM",
+];
+
+const contactItems = [
+  { label: "Address", value: "123 Street Name, City, Country, Zip Code" },
+  { label: "Phone", value: "0410 886 899", href: "tel:0410886899" },
+  { label: "Email", value: "info@tradecareplus.com.au", href: "mailto:info@tradecareplus.com.au" },
+];
+
+function FooterTitle({
+  before,
+  highlight,
+}: {
+  before: string;
+  highlight: string;
+}) {
+  return (
+    <div className="mb-[25px]">
+      <h5 className="font-alt text-lg font-bold leading-[1.2] text-white">
+        {before} <span className="text-[#FFC527]">{highlight}</span>
+      </h5>
+      <div className="mt-3 h-0.5 w-[50px] bg-red-600" />
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="bg-[#2a2a2a] text-white pt-20 pb-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* About */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6">Trade<span className="text-yellow-500">CarePlus</span></h3>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              We provide professional home maintenance services with a focus on quality and customer satisfaction. One call solves all your house problems.
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-yellow-500 hover:text-white p-2 rounded-full transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-yellow-500 hover:text-white p-2 rounded-full transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-yellow-500 hover:text-white p-2 rounded-full transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-yellow-500 hover:text-white p-2 rounded-full transition-colors">
-                <Linkedin size={20} />
-              </a>
+    <section className="w-full">
+      <section className="relative lg:py-10">
+        {/* split background for desktop */}
+        <div className="absolute inset-0 hidden lg:block">
+          <div className="grid h-full grid-cols-2">
+            <div className="bg-black" />
+            <div className="bg-yellow-400" />
+          </div>
+        </div>
+
+        <div className="relative mx-auto max-w-[1280px]">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-0">
+            {/* left */}
+            <div className="text-center">
+              <div className="flex flex-wrap gap-8 items-center justify-center">
+                <div className="px-[15px] py-[15px]">
+                  <img
+                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-1.png"
+                    alt="Certificate 1"
+                    className="h-auto w-[122px]"
+                  />
+                </div>
+                <div className="px-[15px] py-[15px]">
+                  <img
+                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-2.png"
+                    alt="Certificate 2"
+                    className="h-auto w-[122px]"
+                  />
+                </div>
+                <div className="px-[15px] py-[15px]">
+                  <img
+                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-3.png"
+                    alt="Certificate 3"
+                    className="h-auto w-[122px]"
+                  />
+                </div>
+              </div>
+
+              <p className="mt-6 text-center text-md text-white font-alt">
+                We are recognized all over the world - Our Awards Through
+              </p>
+            </div>
+
+            {/* right */}
+            <div className="bg-yellow-400 px-5 py-5 sm:px-8 sm:py-8 lg:ml-[8%] lg:bg-transparent lg:px-0 lg:py-0">
+              <h3 className="font-alt mb-5 text-center text-2xl font-semibold text-black lg:text-left">
+                All Major Cards Accepted
+              </h3>
+
+              <div className="flex flex-col items-center justify-center lg:items-start xl:flex-row xl:justify-start">
+                <img
+                  src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-1.png"
+                  alt="Cards accepted"
+                  className="h-auto w-auto max-w-full"
+                />
+                <img
+                  src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-2.webp"
+                  alt="More payment options"
+                  className="mt-[9px] h-auto w-auto max-w-full xl:ml-[18px] xl:mt-0"
+                />
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+      {/* Main footer */}
+      <section className="relative overflow-hidden bg-[#181818] px-4 py-[40px] sm:px-6 sm:py-[60px] xl:py-[90px]">
+        <div
+          className="absolute inset-0 opacity-80"
+          style={{
+            backgroundImage:
+              "url('https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footerbg.png')",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        />
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-6 border-l-4 border-yellow-500 pl-4">Quick Links</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li><Link href="/" className="hover:text-yellow-500 transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-yellow-500 transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Services</Link></li>
-              <li><Link href="/sales-hire" className="hover:text-yellow-500 transition-colors">Sales and Hire</Link></li>
-              <li><Link href="/projects" className="hover:text-yellow-500 transition-colors">Projects</Link></li>
-              <li><Link href="/contact" className="hover:text-yellow-500 transition-colors">Contact Us</Link></li>
-            </ul>
-          </div>
+        <div className="relative mx-auto max-w-[1290px] px-6">
+          <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-[30px] xl:grid-cols-4">
+            {/* About */}
+            <div>
+              <FooterTitle before="About Our" highlight="Global" />
 
-          {/* Services */}
-          <div>
-            <h3 className="text-xl font-bold mb-6 border-l-4 border-yellow-500 pl-4">Our Services</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Plumbing</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Electrical</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Aircon & HVAC</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Property Maintenance</Link></li>
-              <li><Link href="/services" className="hover:text-yellow-500 transition-colors">Renovations</Link></li>
-            </ul>
-          </div>
+              <p className="mb-6 text-sm leading-[1.72] text-white">
+                We provide professional home maintenance services with a focus on quality and customer satisfaction. One call solves all your house problems.
+              </p>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-6 border-l-4 border-yellow-500 pl-4">Contact Us</h3>
-            <ul className="space-y-4 text-gray-400">
-              <li className="flex items-start space-x-3">
-                <MapPin className="text-yellow-500 mt-1 shrink-0" size={20} />
-                <span>123 Street Name, City, Country, Zip Code</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="text-yellow-500 shrink-0" size={20} />
-                <a href="tel:0410886899" className="hover:text-yellow-500 transition-colors">0410 886 899</a>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail className="text-yellow-500 shrink-0" size={20} />
-                <a href="mailto:info@tradecareplus.com.au" className="hover:text-yellow-500 transition-colors">info@tradecareplus.com.au</a>
-              </li>
-            </ul>
+              
+            </div>
+
+            {/* Useful links */}
+            <div>
+              <FooterTitle before="Useful" highlight="Links" />
+
+              <ul className="space-y-[10px]">
+                {usefulLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="font-['Poppins'] text-[15px] leading-[1.72] text-white transition hover:text-[#FFC527]"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Opening hours */}
+            <div>
+              <FooterTitle before="Opening" highlight="Hours" />
+
+              <ul className="space-y-[10px]">
+                {openingHours.map((item) => (
+                  <li
+                    key={item}
+                    className="font-['Poppins'] text-sm leading-[1.72] text-white"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <FooterTitle before="Contact" highlight="Here" />
+
+              <ul className="mb-5 space-y-[10px]">
+                {contactItems.map((item) => (
+                  <li
+                    key={item.label}
+                    className="font-['Poppins'] text-sm leading-[1.72] text-white"
+                  >
+                    {!item.href ? (
+                      <span>{item.label}: {item.value}</span>
+                    ) : (
+                      <Link href={item.href} className="transition hover:text-[#FFC527]">
+                        {item.label}: {item.value}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex items-center gap-[6px]">
+                <Link
+                  href="#"
+                  className="flex h-10 w-10 items-center justify-center text-white transition hover:text-[#FFC527]"
+                >
+                  <Facebook size={16} />
+                </Link>
+                <Link
+                  href="#"
+                  className="flex h-10 w-10 items-center justify-center text-white transition hover:text-[#FFC527]"
+                >
+                  <Twitter size={16} />
+                </Link>
+                <Link
+                  href="#"
+                  className="flex h-10 w-10 items-center justify-center text-white transition hover:text-[#FFC527]"
+                >
+                  <Globe size={16} />
+                </Link>
+                <Link
+                  href="#"
+                  className="flex h-10 w-10 items-center justify-center text-white transition hover:text-[#FFC527]"
+                >
+                  <Linkedin size={16} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="border-t border-gray-700 pt-8 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} TradeCarePlus. All Rights Reserved.</p>
+      {/* Bottom bar */}
+      <section className="bg-black px-4 py-4 sm:px-6">
+        <div className="mx-auto max-w-[1290px]">
+          <div className=" text-center">
+            <div className="text-sm text-center leading-[1.72] text-white">
+              © 2026 TradeCarePlus. All Rights Reserved.{" "}
+              
+            </div>
+
+            {/* <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
+              <Link
+                href="#"
+                className="inline-flex items-center gap-2 font-['Poppins'] text-[15px] text-white transition hover:text-[#FFC527]"
+              >
+                <Circle size={6} fill="currentColor" />
+                <span>Privacy Policy</span>
+              </Link>
+
+              <Link
+                href="#"
+                className="inline-flex items-center gap-2 font-['Poppins'] text-[15px] text-white transition hover:text-[#FFC527]"
+              >
+                <Circle size={6} fill="currentColor" />
+                <span>Terms &amp; Condition</span>
+              </Link>
+            </div> */}
+          </div>
         </div>
-      </div>
-    </footer>
+      </section>
+    </section>
   );
 }

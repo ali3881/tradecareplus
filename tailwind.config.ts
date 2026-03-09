@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        alt: ["var(--wdtFontTypo_Alt)", "sans-serif"],
+      },
+      colors: {
+        yellow: {
+          400: "#ffc526",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

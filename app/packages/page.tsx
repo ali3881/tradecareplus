@@ -1,79 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Check, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-
-type PackageItem = {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  currency: string;
-  duration: string;
-  features: string[];
-  isMostPopular: boolean;
-};
+import { Check, X, ShieldCheck } from "lucide-react";
+import Pricing from "@/components/Pricing";
 
 export default function PackagesPage() {
-  const router = useRouter();
-  const { data: session, status } = useSession();
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
-  const [packages, setPackages] = useState<PackageItem[]>([]);
-  const [loadingPackages, setLoadingPackages] = useState(true);
-
-  const formatDuration = (duration: string) => duration.replace(/^1\s+/i, "");
-
-  useEffect(() => {
-    const loadPackages = async () => {
-      try {
-        const res = await fetch("/api/packages", { cache: "no-store" });
-        const data = await res.json();
-        setPackages(Array.isArray(data) ? data : []);
-      } finally {
-        setLoadingPackages(false);
-      }
-    };
-
-    loadPackages();
-  }, []);
-
-  const handleSubscribe = async (pkg: PackageItem) => {
-    if (status === "loading") return;
-
-    if (!session?.user) {
-      router.push(`/signup?plan=${encodeURIComponent(pkg.title)}&packageId=${encodeURIComponent(pkg.id)}`);
-      return;
-    }
-
-    setLoadingPlan(pkg.id);
-    try {
-      const res = await fetch("/api/billing/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ packageId: pkg.id, plan: pkg.title }),
-      });
-
-      const data = await res.json();
-      if (!res.ok || !data?.url) {
-        throw new Error(data?.error || "Failed to start checkout");
-      }
-
-      window.location.href = data.url;
-    } catch (error: any) {
-      alert(error.message || "Failed to start checkout");
-      setLoadingPlan(null);
-    }
-  };
-
   return (
-    <main className="flex-grow">
-      <div className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-4">Subscription Plans</h1>
-          <div className="flex items-center text-sm">
+    <main className="flex-grow ">
+      <div className="bg-gray-900 text-white py-16 pt-20">
+        <div className="font-alt max-w-[1290px] mx-auto px-6 flex justify-between items-center">
+          <h1 className="text-4xl font-semibold ">Package</h1>
+          <div className="flex items-center text-md">
             <Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link>
             <span className="mx-2 text-gray-600">/</span>
             <span className="text-yellow-500">Packages</span>
@@ -81,72 +18,35 @@ export default function PackagesPage() {
         </div>
       </div>
 
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4 mb-12 text-sm font-semibold uppercase tracking-wide text-gray-600">
-            <span className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 flex items-center gap-2">
-              <Check className="text-green-500" size={16} /> Chat + video calls
-            </span>
-            <span className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 flex items-center gap-2">
-              <Check className="text-green-500" size={16} /> 24/7 emergency coverage (Premium)
-            </span>
-            <span className="bg-white px-4 py-2 rounded shadow-sm border border-gray-100 flex items-center gap-2">
-              <Check className="text-green-500" size={16} /> In-app payments only
-            </span>
+      <Pricing mode="packages" showHeader={false} />
+
+
+
+      <section className="py-16 md:py-20 bg-white border-t border-gray-100">
+        <div className="max-w-[1290px] mx-auto px-6">
+          <div className="mx-auto mb-14 max-w-[760px] text-center">
+            <div className="relative mx-auto inline-block border border-[#e7c76a] px-10 pt-8 pb-6">
+              <div className="absolute -top-6 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-white">
+                <ShieldCheck className="h-5 w-5 text-yellow-400" strokeWidth={2.2} />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-alt font-extrabold uppercase leading-none tracking-tight text-black">
+                Exactly What’s Included
+              </h2>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white w-max px-3">
+                <span className="text-xs font-alt font-bold uppercase tracking-[2px] text-red-600">
+                  Clear + Safe
+                </span>
+              </div>
+            </div>
+            <p className="mx-auto mt-10 max-w-xl text-sm leading-6 text-[#7a7a7a]">
+              A transparent breakdown of what your plan covers and what is quoted separately, so there are no surprises.
+            </p>
           </div>
 
-          {loadingPackages ? (
-            <div className="text-center text-gray-500">Loading packages...</div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {packages.map((pkg) => (
-                <div key={pkg.id} className={`bg-white rounded-lg shadow-lg overflow-hidden border-t-4 ${pkg.isMostPopular ? 'border-yellow-500 transform scale-105 z-10 shadow-xl' : 'border-gray-200'}`}>
-                  {pkg.isMostPopular && (
-                    <div className="bg-yellow-500 text-black text-center py-1 font-bold text-sm uppercase">
-                      Most Popular
-                    </div>
-                  )}
-                  <div className="p-8 flex flex-col h-full">
-                    <h3 className="text-2xl font-bold mb-2">{pkg.title}</h3>
-                    <p className="text-gray-600 mb-6 h-12">{pkg.description}</p>
-                    <div className="flex items-baseline mb-6">
-                      <span className="text-4xl font-bold text-gray-900">
-                        {pkg.currency.toUpperCase() === "USD" ? "$" : `${pkg.currency.toUpperCase()} `}
-                        {pkg.price}
-                      </span>
-                      <span className="text-gray-500 ml-1">/{formatDuration(pkg.duration)}</span>
-                    </div>
-                    <ul className="space-y-3 mb-8 flex-grow">
-                      {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <Check className="text-green-500 mr-2 flex-shrink-0 mt-1" size={16} />
-                          <span className="text-gray-700 text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <button
-                      onClick={() => handleSubscribe(pkg)}
-                      disabled={loadingPlan === pkg.id}
-                      className={`w-full py-3 rounded font-bold transition-colors text-center block ${pkg.isMostPopular ? 'bg-yellow-500 hover:bg-yellow-400 text-black' : 'bg-gray-800 hover:bg-gray-700 text-white'}`}
-                    >
-                      {loadingPlan === pkg.id ? "REDIRECTING..." : "SUBSCRIBE NOW"}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section className="py-20 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Exactly What’s Included (Clear + Safe)</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div className="bg-green-50 p-8 rounded-lg border border-green-100">
-              <h3 className="text-xl font-bold text-green-800 mb-6 flex items-center">
-                <Check className="bg-green-500 text-white rounded-full p-1 mr-3" size={24} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 max-w-5xl mx-auto">
+            <div className="rounded-md border border-green-200 bg-green-50 p-6 md:p-8 shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
+              <h3 className="font-alt text-xl md:text-2xl font-bold text-green-800 mb-6 flex items-center">
+                <Check className="bg-green-500 text-white rounded-full p-1 mr-3" size={26} />
                 INCLUDED
               </h3>
               <ul className="space-y-4">
@@ -157,17 +57,17 @@ export default function PackagesPage() {
                   "Hot water system inspections",
                   "General plumbing maintenance",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start text-green-900">
-                    <Check className="text-green-600 mr-3 mt-1 flex-shrink-0" size={18} />
+                  <li key={idx} className="flex items-start text-sm md:text-base text-green-900">
+                    <Check className="text-green-600 mr-3 mt-0.5 flex-shrink-0" size={18} />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-red-50 p-8 rounded-lg border border-red-100">
-              <h3 className="text-xl font-bold text-red-800 mb-6 flex items-center">
-                <X className="bg-red-500 text-white rounded-full p-1 mr-3" size={24} />
+            <div className="rounded-md border border-red-200 bg-red-50 p-6 md:p-8 shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
+              <h3 className="font-alt text-xl md:text-2xl font-bold text-red-800 mb-6 flex items-center">
+                <X className="bg-red-500 text-white rounded-full p-1 mr-3" size={26} />
                 NOT INCLUDED (Quoted Separately)
               </h3>
               <ul className="space-y-4">
@@ -177,8 +77,8 @@ export default function PackagesPage() {
                   "New builds / renovations",
                   "After‑hours emergency labour (discounted only)",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start text-red-900">
-                    <X className="text-red-600 mr-3 mt-1 flex-shrink-0" size={18} />
+                  <li key={idx} className="flex items-start text-sm md:text-base text-red-900">
+                    <X className="text-red-600 mr-3 mt-0.5 flex-shrink-0" size={18} />
                     {item}
                   </li>
                 ))}

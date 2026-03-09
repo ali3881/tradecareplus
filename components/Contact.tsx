@@ -1,6 +1,6 @@
 "use client";
 
-import { Wrench } from "lucide-react";
+import { Contact2 } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -36,16 +36,25 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-white overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-[1290px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start lg:items-center">
           {/* Left Side: Content & Form */}
-          <div>
-            <div className="mb-6">
-              <Wrench className="text-yellow-500 w-8 h-8 mb-4" />
-              <h2 className="text-4xl font-bold text-black uppercase tracking-wide mb-2">CONTACT US</h2>
-              <div className="relative inline-block">
-                <span className="text-orange-500 font-medium text-lg tracking-wide relative z-10">For Appointment</span>
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-orange-200 opacity-50"></div>
+          <div className="w-full">
+            <div className="mb-10 text-left">
+              <div className="relative inline-block border border-[#e7c76a] px-10 pt-8 pb-6">
+                <div className="absolute -top-6 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-white">
+                  <Contact2 className="h-5 w-5 text-yellow-400" strokeWidth={2.2} />
+                </div>
+
+                <h2 className="text-4xl font-alt font-extrabold uppercase leading-none tracking-tight text-black">
+                  CONTACT US
+                </h2>
+
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white w-max px-3">
+                  <span className="text-xs font-alt font-bold uppercase tracking-[2px] text-red-500">
+                    For Appointment
+                  </span>
+                </div>
               </div>
             </div>
             
@@ -53,7 +62,7 @@ export default function Contact() {
               Have a home maintenance project or emergency? Fill out the form below, and our team will get back to you as soon as possible. We are here to help you with all your repair and renovation needs.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5 max-w-md">
+            <form onSubmit={handleSubmit} className="space-y-5 max-w-xl">
               <input 
                 type="text" 
                 name="name"
@@ -61,7 +70,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Name" 
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
               />
               <input 
                 type="email" 
@@ -70,7 +79,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Email" 
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
               />
               <div className="relative">
                 <select 
@@ -78,7 +87,7 @@ export default function Contact() {
                   value={formData.service}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 appearance-none cursor-pointer transition-colors text-gray-500"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 appearance-none cursor-pointer transition-colors text-gray-500"
                 >
                   <option value="">Type Of Services</option>
                   <option value="Plumbing">Plumbing</option>
@@ -100,13 +109,13 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Phone"
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
               />
 
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`bg-yellow-500 text-black font-bold py-3 px-8 rounded text-sm hover:bg-yellow-400 transition-colors uppercase w-full sm:w-auto mt-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`bg-yellow-400 text-black font-alt font-semibold py-3 px-8 rounded text-sm hover:bg-yellow-400 transition-colors uppercase w-full sm:w-auto mt-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? 'SENDING...' : 'CONTACT US'}
               </button>
@@ -120,13 +129,21 @@ export default function Contact() {
           </div>
 
           {/* Right Side: Image */}
-          <div className="relative h-full min-h-[500px] hidden lg:block">
-             <div className="absolute inset-0 flex items-center justify-center">
-                {/* We use a simple image tag here. In a real project, we'd use next/image and a mask. */}
+          <div className="hidden lg:flex h-full min-h-[520px] w-full items-center justify-center">
+             <div
+                className="h-full w-full flex items-center justify-center"
+                style={{
+                  WebkitMaskImage:
+                    "url(https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/mask-image2.png)",
+                    WebkitMaskSize: "contain",
+                    WebkitMaskPosition: "center center",
+                    WebkitMaskRepeat: "no-repeat",
+                }}
+              >
                 <img 
-                  src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop" 
+                  src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/book-online.jpg" 
                   alt="Construction Worker" 
-                  className="max-h-[600px] w-auto object-contain mask-image-brush" 
+                  className="h-full w-full object-cover" 
                 />
              </div>
           </div>

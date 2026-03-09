@@ -1,9 +1,10 @@
 "use client";
 
-import { UserPlus } from "lucide-react";
+import { UserPlus, User, Mail, Phone, Lock, CreditCard, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Signup() {
   const router = useRouter();
@@ -19,12 +20,12 @@ export default function Signup() {
     phone: "",
     password: "",
     confirmPassword: "",
-    plan: ""
+    plan: "",
   });
-  
+
   useEffect(() => {
     if (planParam) {
-      setFormData(prev => ({ ...prev, plan: planParam }));
+      setFormData((prev) => ({ ...prev, plan: planParam }));
     }
   }, [planParam]);
 
@@ -53,7 +54,7 @@ export default function Signup() {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-    
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setIsSubmitting(false);
@@ -61,7 +62,6 @@ export default function Signup() {
     }
 
     try {
-      // 1. Create User
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -73,7 +73,6 @@ export default function Signup() {
         throw new Error(msg || "Signup failed");
       }
 
-      // 2. Sign In
       const signInRes = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
@@ -84,7 +83,6 @@ export default function Signup() {
         throw new Error("Account created but sign-in failed. Please log in and subscribe.");
       }
 
-      // 3. Redirect to Stripe checkout for selected plan
       const checkoutRes = await fetch("/api/billing/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,7 +100,6 @@ export default function Signup() {
       }
 
       window.location.href = checkoutData.url;
-
     } catch (err: any) {
       console.error(err);
       setError(err.message);
@@ -113,124 +110,167 @@ export default function Signup() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
-    <section id="signup" className="py-20 bg-white overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side: Content & Form */}
-          <div>
-            <div className="mb-6">
-              <UserPlus className="text-yellow-500 w-8 h-8 mb-4" />
-              <h2 className="text-4xl font-bold text-black uppercase tracking-wide mb-2">SIGN UP</h2>
-              <div className="relative inline-block">
-                <span className="text-orange-500 font-medium text-lg tracking-wide relative z-10">Create Your Account</span>
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-orange-200 opacity-50"></div>
+    <section id="signup" className="bg-[#f7f7f7] py-14 md:py-20">
+      <div className="max-w-[1290px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+          <div className="hidden lg:flex relative overflow-hidden rounded-md bg-black text-white p-10">
+            <div
+              className="absolute inset-0 bg-[url('https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/intro-section-pattern.png')] bg-repeat opacity-20"
+              aria-hidden="true"
+            />
+            <div className="relative z-10 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center justify-center h-11 w-11 bg-yellow-400 text-black rounded-sm">
+                  <UserPlus className="h-6 w-6" />
+                </div>
+                <h2 className="font-alt mt-6 text-4xl leading-tight font-bold">Create Your Account</h2>
+                <p className="mt-5 text-white/80 max-w-md leading-relaxed">
+                  Join TradeCarePlus to manage your services, plans, and billing in one place with a smooth and reliable experience.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 text-yellow-400 font-semibold">
+                <span>Simple Plans, Trusted Service</span>
+                <ArrowRight className="h-4 w-4" />
               </div>
             </div>
-            
-            <p className="text-gray-500 mb-8 leading-relaxed text-sm max-w-lg">
-              Join TradeCarePlus today and get access to professional home maintenance services. Choose a plan that suits your needs and let us take care of your home.
+          </div>
+
+          <div className="bg-white rounded-md border border-black/10 shadow-[0_14px_40px_rgba(0,0,0,0.08)] p-6 sm:p-8 md:p-10">
+            <div className="mb-10 text-left">
+              <div className="relative inline-block border border-[#e7c76a] px-10 pt-8 pb-6">
+                <div className="absolute -top-6 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-white">
+                  <UserPlus className="h-5 w-5 text-yellow-400" strokeWidth={2.2} />
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-alt font-extrabold uppercase leading-none tracking-tight text-black">
+                  Sign Up
+                </h2>
+
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white w-max px-3">
+                  <span className="text-xs font-alt font-bold uppercase tracking-[2px] text-red-500">Create Account</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="mb-6 text-sm text-gray-600">
+              Fill your details and choose a plan to continue. Already have an account?{" "}
+              <Link href="/login" className="font-semibold text-yellow-600 hover:text-red-600 transition-colors">
+                Sign in
+              </Link>
+              .
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5 max-w-md">
-              <input 
-                type="text" 
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Full Name" 
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
-              />
-              <input 
-                type="email" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email Address" 
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
-              />
-              <input 
-                type="tel" 
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
-              />
-              
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="relative">
-                <select 
+                <User className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Full Name"
+                  required
+                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                />
+              </div>
+
+              <div className="relative">
+                <Mail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address"
+                  required
+                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                />
+              </div>
+
+              <div className="relative">
+                <Phone className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                  required
+                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                />
+              </div>
+
+              <div className="relative">
+                <CreditCard className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <select
                   name="plan"
                   value={formData.plan}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 appearance-none cursor-pointer transition-colors text-gray-500"
+                  className="w-full appearance-none rounded border border-gray-300 bg-white py-3 pl-11 pr-10 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
                 >
                   <option value="">Select a Plan</option>
                   {packageOptions.map((pkg) => (
                     <option key={pkg.id} value={pkg.title}>
-                      {pkg.title} - {pkg.currency === "USD" ? "$" : `${pkg.currency} `}{pkg.price}/{formatDuration(pkg.duration)}
+                      {pkg.title} - {pkg.currency === "USD" ? "$" : `${pkg.currency} `}
+                      {pkg.price}/{formatDuration(pkg.duration)}
                     </option>
                   ))}
                 </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+                <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">▾</div>
               </div>
 
-              <input 
-                type="password" 
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password" 
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
-              />
-              <input 
-                type="password" 
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm Password" 
-                required
-                className="w-full px-4 py-3 bg-white border border-gray-100 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
-              />
+              <div className="relative">
+                <Lock className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                />
+              </div>
 
-              {error && (
-                <div className="text-red-600 text-sm">{error}</div>
-              )}
+              <div className="relative">
+                <Lock className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  required
+                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
+                />
+              </div>
 
-              <button 
-                type="submit" 
+              {error ? <div className="rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div> : null}
+
+              <button
+                type="submit"
                 disabled={isSubmitting}
-                className={`bg-yellow-500 text-black font-bold py-3 px-8 rounded text-sm hover:bg-yellow-400 transition-colors uppercase w-full sm:w-auto mt-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`inline-flex w-full items-center justify-center rounded bg-yellow-400 px-6 py-3 text-sm font-bold uppercase text-black transition-colors hover:bg-yellow-500 ${
+                  isSubmitting ? "cursor-not-allowed opacity-70" : ""
+                }`}
               >
-                {isSubmitting ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
+                {isSubmitting ? "Creating Account..." : "Create Account"}
               </button>
-              
             </form>
           </div>
-
-          {/* Right Side: Image */}
-          <div className="relative h-full min-h-[500px] hidden lg:block">
-             <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Team Meeting" 
-                  className="max-h-[600px] w-auto object-contain mask-image-brush" 
-                />
-             </div>
-          </div>
         </div>
+
+        <p className="mt-6 text-center text-sm text-gray-500 lg:hidden">
+          Already have an account?{" "}
+          <Link href="/login" className="font-semibold text-yellow-600 hover:text-red-600 transition-colors">
+            Sign in
+          </Link>
+        </p>
       </div>
     </section>
   );

@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
 import "@/lib/env"; // Validate env vars on startup
-import { Inter } from "next/font/google";
+import { Josefin_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import AppShell from "@/components/AppShell";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--e-global-typography-text-font-family",
+});
+
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--wdtFontTypo_Alt",
+});
 
 export const metadata: Metadata = {
   title: "TradeCarePlus - Construction & Maintenance",
@@ -19,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
+      <body className={`${poppins.variable} ${josefinSans.variable} antialiased min-h-screen flex flex-col`}>
         <Providers>
           <AppShell>{children}</AppShell>
         </Providers>

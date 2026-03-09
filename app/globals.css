@@ -7,10 +7,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --e-global-typography-text-font-family: "Poppins";
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--e-global-typography-text-font-family), Sans-serif;
 }

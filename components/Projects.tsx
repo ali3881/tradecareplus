@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Book } from "lucide-react";
 import Link from "next/link";
 
 const projects = [
@@ -36,19 +36,35 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="text-yellow-500 font-bold uppercase tracking-wider text-sm mb-2 block">
-            Our Work
-          </span>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Latest Projects</h2>
-          <div className="w-20 h-1 bg-yellow-500 mx-auto rounded"></div>
+    <section id="projects" className="py-20">
+      <div className="max-w-[1290px] mx-auto px-6">
+       
+
+        <div className="mb-16 text-center">
+          <div className="relative mx-auto inline-block border border-[#e7c76a] px-10 pt-8 pb-6">
+            <div className="absolute -top-6 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center bg-white">
+              <Book className="h-5 w-5 text-yellow-400" strokeWidth={2.2} />
+            </div>
+
+            <h2 className="text-4xl font-alt font-extrabold uppercase leading-none tracking-tight">
+              Our Projects
+            </h2>
+
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white w-max px-3">
+              <span className="text-xs font-alt font-bold uppercase tracking-[2px]">
+                What We Have Done
+              </span>
+            </div>
+          </div>
+
+          <p className="mx-auto mt-10 max-w-xl text-sm leading-6 text-[#7a7a7a]">
+            We take pride in our work and have completed a wide range of projects, from small repairs to large renovations, showcasing our expertise and commitment to quality.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <Link href="/projects" key={index} className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer block">
+            <Link href="/projects" key={index} className="group relative overflow-hidden shadow-lg cursor-pointer block">
               <div className="aspect-w-4 aspect-h-3 h-64 w-full">
                 <img 
                   src={project.image} 
