@@ -15,3 +15,39 @@ body {
   background: var(--background);
   font-family: var(--e-global-typography-text-font-family), Sans-serif;
 }
+
+.rich-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.rich-content > * {
+  max-width: 100%;
+}
+
+.rich-content img,
+.rich-content video,
+.rich-content iframe,
+.rich-content table,
+.rich-content pre,
+.rich-content code,
+.rich-content a {
+  max-width: 100%;
+}
+
+.rich-content img,
+.rich-content video,
+.rich-content iframe {
+  display: block;
+  height: auto;
+}
+
+.rich-content pre,
+.rich-content code {
+  white-space: pre-wrap;
+}
+
+.rich-content table {
+  display: block;
+  overflow-x: auto;
+}

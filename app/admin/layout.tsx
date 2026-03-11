@@ -10,9 +10,10 @@ import {
   BarChart2, 
   Settings, 
   FileText,
-  List,
   Receipt,
-  Package
+  Package,
+  FolderOpen,
+  Wrench
 } from "lucide-react";
 
 export default async function AdminLayout({
@@ -59,11 +60,18 @@ export default async function AdminLayout({
                 Staff
               </Link>
               <Link
-                href="/admin/service-types"
+                href="/admin/projects"
                 className="flex items-center px-4 py-3 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-lg transition-colors font-medium"
               >
-                <List className="w-5 h-5 mr-3" />
-                Service Types
+                <FolderOpen className="w-5 h-5 mr-3" />
+                Projects
+              </Link>
+              <Link
+                href="/admin/services"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 rounded-lg transition-colors font-medium"
+              >
+                <Wrench className="w-5 h-5 mr-3" />
+                Services
               </Link>
               
             </>

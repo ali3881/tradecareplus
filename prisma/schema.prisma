@@ -170,13 +170,6 @@ model SystemSetting {
   updatedAt DateTime @updatedAt
 }
 
-model ServiceType {
-  id        String   @id @default(cuid())
-  title     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model SubscriptionPackage {
   id            String   @id @default(cuid())
   title         String
@@ -193,4 +186,28 @@ model SubscriptionPackage {
   updatedAt     DateTime @updatedAt
 
   @@map("Package")
+}
+
+model Project {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  imageUrl      String
+  description   String
+  serviceId     String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  service       Service   @relation(fields: [serviceId], references: [id])
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  imageUrl    String
+  description String
+  iconKey     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[]
 }

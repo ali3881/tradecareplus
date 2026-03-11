@@ -41,7 +41,7 @@ export default function JobDetailsModal({ job, onClose }: JobDetailsModalProps) 
 
   return (
     <>
-      <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div className="fixed inset-0 z-[1100] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onClick={onClose}></div>
 
@@ -169,7 +169,7 @@ export default function JobDetailsModal({ job, onClose }: JobDetailsModalProps) 
 
       {/* Lightbox for full image */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[60] overflow-hidden bg-black bg-opacity-90 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
+        <div className="fixed inset-0 z-[1110] overflow-hidden bg-black bg-opacity-90 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
             <button className="absolute top-4 right-4 text-white hover:text-gray-300">
                 <X className="h-8 w-8" />
             </button>

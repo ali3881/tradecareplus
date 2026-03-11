@@ -1,9 +1,10 @@
 "use client";
 
 import { Contact2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Contact() {
+  const [services, setServices] = useState<{ id: string; title: string }[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,6 +13,28 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadServices() {
+      try {
+        const res = await fetch("/api/services", { cache: "no-store" });
+        const data = await res.json();
+        if (!ignore && Array.isArray(data)) {
+          setServices(data);
+        }
+      } catch (error) {
+        console.error("Failed to load services", error);
+      }
+    }
+
+    loadServices();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,10 +113,11 @@ export default function Contact() {
                   className="w-full px-4 py-3 bg-white border border-gray-300 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 appearance-none cursor-pointer transition-colors text-gray-500"
                 >
                   <option value="">Type Of Services</option>
-                  <option value="Plumbing">Plumbing</option>
-                  <option value="Electrical">Electrical</option>
-                  <option value="Carpentry">Carpentry</option>
-                  <option value="Painting">Painting</option>
+                  {services.map((service) => (
+                    <option key={service.id} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">

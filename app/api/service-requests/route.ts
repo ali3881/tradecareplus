@@ -64,14 +64,14 @@ export async function POST(req: Request) {
 
     const body = createServiceRequestSchema.parse(json);
 
-    const serviceType = await prisma.serviceType.findUnique({
+    const service = await prisma.service.findFirst({
       where: { title: body.type.trim() },
       select: { id: true },
     });
 
-    if (!serviceType) {
+    if (!service) {
       return NextResponse.json(
-        { code: "VALIDATION_ERROR", message: "Invalid service type" },
+        { code: "VALIDATION_ERROR", message: "Invalid service" },
         { status: 422 }
       );
     }

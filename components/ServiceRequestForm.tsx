@@ -19,8 +19,8 @@ interface ServiceRequestFormProps {
 }
 
 export default function ServiceRequestForm({ onClose, onSuccess }: ServiceRequestFormProps) {
-  const [serviceTypes, setServiceTypes] = useState<{ id: string; title: string }[]>([]);
-  const [typesLoading, setTypesLoading] = useState(true);
+  const [services, setServices] = useState<{ id: string; title: string }[]>([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
   const [formData, setFormData] = useState({
     type: "",
     description: "",
@@ -35,24 +35,24 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const loadServiceTypes = async () => {
+    const loadServices = async () => {
       try {
-        const res = await fetch("/api/service-types", { cache: "no-store" });
+        const res = await fetch("/api/services", { cache: "no-store" });
         const data = await res.json();
         if (Array.isArray(data)) {
-          setServiceTypes(data);
+          setServices(data);
           if (data.length > 0) {
             setFormData((prev) => ({ ...prev, type: data[0].title }));
           }
         }
       } catch (e) {
-        setError("Failed to load service types");
+        setError("Failed to load services");
       } finally {
-        setTypesLoading(false);
+        setServicesLoading(false);
       }
     };
 
-    loadServiceTypes();
+    loadServices();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -245,7 +245,7 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
 
     try {
       if (!formData.type) {
-        throw new Error("Please select a service type");
+        throw new Error("Please select a service");
       }
 
       // 1. Upload all pending files
@@ -313,17 +313,17 @@ export default function ServiceRequestForm({ onClose, onSuccess }: ServiceReques
 
             <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-                <label className="block text-sm font-medium text-gray-700">Service Type</label>
+                <label className="block text-sm font-medium text-gray-700">Service</label>
                 <select 
                 name="type" 
                 value={formData.type} 
                 onChange={handleChange}
-                disabled={typesLoading || serviceTypes.length === 0}
+                disabled={servicesLoading || services.length === 0}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
                 >
-                {serviceTypes.map((type) => (
-                  <option key={type.id} value={type.title}>
-                    {type.title}
+                {services.map((service) => (
+                  <option key={service.id} value={service.title}>
+                    {service.title}
                   </option>
                 ))}
                 </select>

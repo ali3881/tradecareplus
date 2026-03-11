@@ -15,7 +15,7 @@ export default function ProjectsPage() {
         </div>
       </div>
       
-      <Projects />
+      <Projects showCta={false} />
     </main>
   );
 }

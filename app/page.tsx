@@ -18,7 +18,7 @@ export default function Home() {
         <Pricing />
         <Services />
         <Stats />
-        <Projects />
+        <Projects limit={6} />
         <Testimonials />
         <Contact />
       </main>

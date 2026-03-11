@@ -5,14 +5,13 @@ export const runtime = "nodejs";
 
 export async function GET() {
   try {
-    const items = await prisma.serviceType.findMany({
+    const items = await prisma.service.findMany({
       orderBy: { createdAt: "desc" },
-      select: { id: true, title: true },
     });
 
     return NextResponse.json(items);
   } catch (error) {
-    console.error("Error fetching service types:", error);
+    console.error("Error fetching services:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
