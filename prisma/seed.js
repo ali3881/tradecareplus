@@ -15,6 +15,11 @@ const USERS = [
     role: "STAFF",
   },
   {
+    name: "tayyab2",
+    email: "tayyab2@mail.com",
+    role: "USER",
+  },
+  {
     name: "tayyab",
     email: "tayyab@mail.com",
     role: "USER",
@@ -132,11 +137,71 @@ async function seedPackages() {
   }
 }
 
+async function seedBasicAccessForTayyab() {
+  const user = await prisma.user.findUnique({
+    where: { email: "tayyab@mail.com" },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return;
+  }
+
+  const now = new Date();
+  const periodEnd = new Date(now);
+  periodEnd.setMonth(periodEnd.getMonth() + 1);
+
+  await prisma.subscription.upsert({
+    where: { userId: user.id },
+    update: {
+      plan: "BASIC",
+      status: "ACTIVE",
+      stripeCustomerId: `seed_cus_${user.id}`,
+      stripeSubscriptionId: `seed_sub_basic_${user.id}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    },
+    create: {
+      userId: user.id,
+      plan: "BASIC",
+      status: "ACTIVE",
+      stripeCustomerId: `seed_cus_${user.id}`,
+      stripeSubscriptionId: `seed_sub_basic_${user.id}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    },
+  });
+
+  await prisma.entitlement.upsert({
+    where: { userId: user.id },
+    update: {
+      year: now.getFullYear(),
+      includedVisitsRemaining: 0,
+      cctvDueAt: null,
+      jetBlastDueAt: null,
+      hotWaterInspectionDueAt: null,
+      lastChecklistSentAt: null,
+    },
+    create: {
+      userId: user.id,
+      year: now.getFullYear(),
+      includedVisitsRemaining: 0,
+      cctvDueAt: null,
+      jetBlastDueAt: null,
+      hotWaterInspectionDueAt: null,
+      lastChecklistSentAt: null,
+    },
+  });
+}
+
 async function main() {
   const passwordHash = await bcrypt.hash("123456", 10);
 
   await seedUsers(passwordHash);
   await seedPackages();
+  await seedBasicAccessForTayyab();
 
   console.log("Seed completed.");
 }
