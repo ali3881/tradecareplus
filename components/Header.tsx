@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
   { href: "/packages", label: "Package" },
+  { href: "/sales-hire", label: "Sales and Hire" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -119,16 +120,10 @@ export default function Header() {
   return (
     <header className="w-full relative z-[120]">
       <div className="hidden md:block py-3 bg-[#111111] text-white text-sm uppercase">
-        <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-center lg:justify-between">
-          <Link href="/contact" className="hidden lg:flex items-center gap-3 text-yellow-400 hover:text-white transition-colors">
-            <MapPin className="text-white" size={14} />
-            <span>Our Branches</span>
-          </Link>
+        <div className="max-w-[1280px] mx-auto px-6 flex items-end justify-end">
+          
           <div className="flex items-center gap-[40px]">
-            <Link href="/contact" className="flex items-center gap-3 text-yellow-400 hover:text-white transition-colors">
-              <Globe className="text-white" size={14} />
-              <span>Book Online</span>
-            </Link>
+            
             <Link href="/contact" className="flex items-center gap-3 text-yellow-400 hover:text-white transition-colors">
               <Wrench className="text-white" size={14} />
               <span>Get An Estimate</span>

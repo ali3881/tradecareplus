@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, ChevronRight, FolderOpen } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { sanitizeProjectHtml } from "@/lib/projects";
+import { normalizeProjectImages, parseProjectImages, sanitizeProjectHtml } from "@/lib/projects";
+import ProjectGallery from "./ProjectGallery";
 
 export default async function ProjectDetailPage({
   params,
@@ -23,6 +24,7 @@ export default async function ProjectDetailPage({
   }
 
   const serviceLabel = project.service.title;
+  const images = normalizeProjectImages(parseProjectImages(project.imagesJson), project.imageUrl);
 
   return (
     <main className="flex-grow bg-white">
@@ -49,11 +51,7 @@ export default async function ProjectDetailPage({
       </div>
 
       <section className="mx-auto max-w-[980px] px-6 py-16">
-        <img
-          src={project.imageUrl}
-          alt={project.title}
-          className="h-[260px] w-full rounded-[28px] object-cover shadow-xl md:h-[480px]"
-        />
+        <ProjectGallery title={project.title} images={images} />
 
         <div className="mt-10 flex flex-wrap items-center gap-6 border-b border-gray-200 pb-8 text-sm text-gray-500">
           <div className="inline-flex items-center gap-2">

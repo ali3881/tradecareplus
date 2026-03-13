@@ -80,7 +80,7 @@ export default function Hero() {
   const [hasMounted, setHasMounted] = useState(false);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const AUTO_MS = 10000;
+  const AUTO_MS = 1000000;
   const SLIDE_FADE_MS = 5000;
   const SERVICE_ZOOM_MS = 520;
   const SERVICE_IN_STAGGER_MS = 240;
@@ -128,9 +128,9 @@ export default function Hero() {
             <div className="absolute inset-0 bg-[#252730]/72" />
             <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-white/100 via-white/45 to-transparent" />
 
-            <div className="relative h-full max-w-[1280px] mx-auto px-4 sm:px-6">
+            <div className="relative h-full max-w-[1280px] mx-auto">
               <div
-                className={`absolute top-[60px] md:top-[110px] lg:top-[125px] w-[480px] lg:w-[560px] h-[480px] lg:h-[560px] transition-opacity duration-[1200ms] ${
+                className={`absolute top-[60px] w-full h-[480px] sm:w-[480px] sm:h-[480px] md:top-[110px] lg:top-[125px] lg:w-[560px]  lg:h-[560px] transition-opacity duration-[1200ms] ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -158,7 +158,7 @@ export default function Hero() {
                             <img
                               src={item.image}
                               alt={item.label}
-                              className="h-[90%] w-[90%] sm:h-[90%] sm:w-[90%] lg:h-full lg:w-full object-contain"
+                              className="h-[80%] w-[80%] sm:h-[90%] sm:w-[90%] lg:h-full lg:w-full object-contain"
                             />
                           </div>
                           <span className="mt-2 sm:mt-3 text-[11px] sm:text-xs lg:text-base text-white leading-none font-semibold font-alt">
@@ -189,7 +189,7 @@ export default function Hero() {
                           <img
                             src={centerServiceItem.image}
                             alt={centerServiceItem.label}
-                            className="h-[90%] w-[90%] sm:h-[90%] sm:w-[90%] lg:h-full lg:w-full object-contain"
+                            className="h-[80%] w-[80%] sm:h-[90%] sm:w-[90%] lg:h-full lg:w-full object-contain"
                           />
                         </div>
                         <span className="mt-2 sm:mt-3 text-[11px] sm:text-xs lg:text-base text-white leading-none font-semibold font-alt">

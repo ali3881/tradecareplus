@@ -1,19 +1,12 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { prisma } from "@/lib/prisma";
+import { buildStorageKey, createStorageClient, getStoragePublicUrl } from "@/lib/storage";
 
-const s3 = process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY && process.env.S3_BUCKET && process.env.AWS_ACCESS_KEY_ID !== "dummy_aws_key"
-  ? new S3Client({
-      region: process.env.AWS_REGION!,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-      },
-    })
-  : null;
+const s3 = createStorageClient();
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,7 +53,11 @@ export async function POST(req: Request) {
       );
     }
 
-  const key = `${context || "uploads"}/${session.user.id}/${Date.now()}-${Math.random().toString(36).substring(7)}${filename ? '-' + filename.replace(/[^a-zA-Z0-9.-]/g, '') : ''}`;
+  const key = buildStorageKey(
+    `${context || "files"}/${session.user.id}/${Date.now()}-${Math.random().toString(36).substring(7)}${
+      filename ? `-${filename.replace(/[^a-zA-Z0-9.-]/g, "")}` : ""
+    }`
+  );
   
   let uploadUrl: string;
   let publicUrl: string;
@@ -75,7 +72,7 @@ export async function POST(req: Request) {
       });
 
       uploadUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
-      publicUrl = `https://${process.env.S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
+      publicUrl = getStoragePublicUrl(key);
     } else {
       // Local Filesystem Upload
       // Client will PUT to this URL. 

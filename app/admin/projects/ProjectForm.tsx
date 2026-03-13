@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { GripVertical, Loader2, Trash2 } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
+import { parseResponse } from "@/lib/http";
 
 type ServiceItem = {
   id: string;
@@ -15,6 +16,7 @@ type ProjectInput = {
   id?: string;
   title: string;
   imageUrl: string;
+  images: string[];
   description: string;
   serviceId: string;
 };
@@ -30,45 +32,88 @@ export default function ProjectForm({
 }) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState(initial?.imageUrl || "");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [form, setForm] = useState<ProjectInput>(
     initial || {
       title: "",
       imageUrl: "",
+      images: [],
       description: "<p></p>",
       serviceId: "",
     }
   );
+  const [localPreviews, setLocalPreviews] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!selectedFile) {
-      setPreviewUrl(form.imageUrl);
+    if (selectedFiles.length === 0) {
+      setLocalPreviews([]);
       return;
     }
 
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreviewUrl(objectUrl);
+    const objectUrls = selectedFiles.map((file) => URL.createObjectURL(file));
+    setLocalPreviews(objectUrls);
 
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [form.imageUrl, selectedFile]);
+    return () => {
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [selectedFiles]);
 
   const uploadImage = async (file: File) => {
-    const body = new FormData();
-    body.append("file", file);
-
-    const res = await fetch("/api/admin/projects/upload", {
+    const presignRes = await fetch("/api/uploads/presign", {
       method: "POST",
-      body,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        mime: file.type,
+        size: file.size,
+        filename: file.name,
+        context: "projects",
+      }),
     });
+    const presignParsed = await parseResponse<{
+      uploadUrl: string;
+      key: string;
+      publicUrl: string;
+      message?: string;
+    }>(presignRes);
 
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok || !data?.url) {
-      throw new Error(data?.error || "Failed to upload image");
+    if (!presignParsed.ok || !presignParsed.json?.uploadUrl || !presignParsed.json?.publicUrl) {
+      throw new Error(presignParsed.json?.message || presignParsed.text || "Failed to create upload");
     }
 
-    return data.url as string;
+    const uploadUrl = presignParsed.json.uploadUrl.startsWith("/")
+      ? `${window.location.origin}${presignParsed.json.uploadUrl}`
+      : presignParsed.json.uploadUrl;
+
+    const uploadRes = await fetch(uploadUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": file.type || "application/octet-stream",
+      },
+      body: file,
+    });
+
+    if (!uploadRes.ok) {
+      throw new Error("Failed to upload image");
+    }
+
+    const confirmRes = await fetch("/api/uploads/confirm", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        key: presignParsed.json.key,
+        url: presignParsed.json.publicUrl,
+        mime: file.type,
+        size: file.size,
+        originalName: file.name,
+      }),
+    });
+    const confirmParsed = await parseResponse<{ message?: string }>(confirmRes);
+
+    if (!confirmParsed.ok && confirmRes.status !== 409) {
+      throw new Error(confirmParsed.json?.message || confirmParsed.text || "Failed to confirm upload");
+    }
+
+    return presignParsed.json.publicUrl;
   };
 
   const save = async () => {
@@ -78,14 +123,18 @@ export default function ProjectForm({
       return;
     }
 
-    if (!selectedFile && !form.imageUrl) {
-      alert("Please select a project image.");
+    if (form.images.length === 0 && selectedFiles.length === 0) {
+      alert("Please select at least one project image.");
       return;
     }
 
     setSaving(true);
     try {
-      const imageUrl = selectedFile ? await uploadImage(selectedFile) : form.imageUrl;
+      const uploadedImages = selectedFiles.length
+        ? await Promise.all(selectedFiles.map((file) => uploadImage(file)))
+        : [];
+      const images = [...form.images, ...uploadedImages];
+      const imageUrl = images[0];
       const endpoint = mode === "create" ? "/api/admin/projects" : `/api/admin/projects/${initial?.id}`;
       const method = mode === "create" ? "POST" : "PATCH";
 
@@ -96,6 +145,7 @@ export default function ProjectForm({
           ...form,
           title: form.title.trim(),
           imageUrl,
+          images,
         }),
       });
 
@@ -111,6 +161,45 @@ export default function ProjectForm({
     } finally {
       setSaving(false);
     }
+  };
+
+  const combinedPreviews = [
+    ...form.images.map((url) => ({ type: "saved" as const, url })),
+    ...localPreviews.map((url, index) => ({ type: "new" as const, url, index })),
+  ];
+
+  const removeSavedImage = (index: number) => {
+    setForm((current) => {
+      const images = current.images.filter((_, currentIndex) => currentIndex !== index);
+      return {
+        ...current,
+        images,
+        imageUrl: images[0] || "",
+      };
+    });
+  };
+
+  const removeSelectedImage = (index: number) => {
+    setSelectedFiles((current) => current.filter((_, currentIndex) => currentIndex !== index));
+  };
+
+  const moveSavedImage = (index: number, direction: -1 | 1) => {
+    setForm((current) => {
+      const nextIndex = index + direction;
+      if (nextIndex < 0 || nextIndex >= current.images.length) {
+        return current;
+      }
+
+      const images = [...current.images];
+      const [moved] = images.splice(index, 1);
+      images.splice(nextIndex, 0, moved);
+
+      return {
+        ...current,
+        images,
+        imageUrl: images[0] || "",
+      };
+    });
   };
 
   return (
@@ -143,17 +232,70 @@ export default function ProjectForm({
             ))}
           </select>
           <div className="md:col-span-2">
-            <label className="mb-2 block text-sm font-medium text-gray-700">Project image</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Project images</label>
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+              multiple
+              onChange={(e) => setSelectedFiles(Array.from(e.target.files || []))}
               className="block w-full rounded border px-3 py-2 text-sm file:mr-4 file:rounded-md file:border-0 file:bg-yellow-500 file:px-3 file:py-2 file:font-medium file:text-black hover:file:bg-yellow-400"
             />
+            <p className="mt-2 text-xs text-gray-500">
+              The first image becomes the main project image. You can reorder saved images below.
+            </p>
           </div>
-          {previewUrl ? (
+          {combinedPreviews.length > 0 ? (
             <div className="md:col-span-2">
-              <img src={previewUrl} alt="Project preview" className="h-64 w-full rounded-xl object-cover" />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {combinedPreviews.map((item, index) => (
+                  <div key={`${item.type}-${item.url}-${index}`} className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+                    <img src={item.url} alt={`Project preview ${index + 1}`} className="h-48 w-full object-cover" />
+                    <div className="flex items-center justify-between gap-2 p-3">
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <GripVertical className="h-4 w-4" />
+                        <span>{index === 0 ? "Primary image" : `Image ${index + 1}`}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {item.type === "saved" ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => moveSavedImage(index, -1)}
+                              disabled={index === 0}
+                              className="rounded border px-2 py-1 text-xs text-gray-600 disabled:opacity-40"
+                            >
+                              Up
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => moveSavedImage(index, 1)}
+                              disabled={index >= form.images.length - 1}
+                              className="rounded border px-2 py-1 text-xs text-gray-600 disabled:opacity-40"
+                            >
+                              Down
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => removeSavedImage(index)}
+                              className="rounded border border-red-200 px-2 py-1 text-xs text-red-600"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => removeSelectedImage(item.index)}
+                            className="rounded border border-red-200 px-2 py-1 text-xs text-red-600"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
         </div>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
 import { defaultServiceIconKey, getServiceIcon, normalizeServiceIconKey, serviceIconOptions } from "@/lib/services";
+import { parseResponse } from "@/lib/http";
 
 type ServiceInput = {
   id?: string;
@@ -53,21 +54,61 @@ export default function ServiceForm({
   }, [form.imageUrl, selectedFile]);
 
   const uploadImage = async (file: File) => {
-    const body = new FormData();
-    body.append("file", file);
-
-    const res = await fetch("/api/admin/services/upload", {
+    const presignRes = await fetch("/api/uploads/presign", {
       method: "POST",
-      body,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        mime: file.type,
+        size: file.size,
+        filename: file.name,
+        context: "services",
+      }),
     });
+    const presignParsed = await parseResponse<{
+      uploadUrl: string;
+      key: string;
+      publicUrl: string;
+      message?: string;
+    }>(presignRes);
 
-    const data = await res.json().catch(() => null);
-
-    if (!res.ok || !data?.url) {
-      throw new Error(data?.error || "Failed to upload image");
+    if (!presignParsed.ok || !presignParsed.json?.uploadUrl || !presignParsed.json?.publicUrl) {
+      throw new Error(presignParsed.json?.message || presignParsed.text || "Failed to create upload");
     }
 
-    return data.url as string;
+    const uploadUrl = presignParsed.json.uploadUrl.startsWith("/")
+      ? `${window.location.origin}${presignParsed.json.uploadUrl}`
+      : presignParsed.json.uploadUrl;
+
+    const uploadRes = await fetch(uploadUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": file.type || "application/octet-stream",
+      },
+      body: file,
+    });
+
+    if (!uploadRes.ok) {
+      throw new Error("Failed to upload image");
+    }
+
+    const confirmRes = await fetch("/api/uploads/confirm", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        key: presignParsed.json.key,
+        url: presignParsed.json.publicUrl,
+        mime: file.type,
+        size: file.size,
+        originalName: file.name,
+      }),
+    });
+    const confirmParsed = await parseResponse<{ message?: string }>(confirmRes);
+
+    if (!confirmParsed.ok && confirmRes.status !== 409) {
+      throw new Error(confirmParsed.json?.message || confirmParsed.text || "Failed to confirm upload");
+    }
+
+    return presignParsed.json.publicUrl;
   };
 
   const save = async () => {

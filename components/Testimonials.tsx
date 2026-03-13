@@ -7,7 +7,7 @@ const testimonials = [
     image: "https://randomuser.me/api/portraits/women/44.jpg",
     title: "Graece Donan, Latine Voluptatem Vocant",
     content:
-      "radeCarePlus transformed our office space completely. Their attention to detail and professionalism were outstanding. Highly recommended for any commercial renovation projects.",
+      "TradeCarePlus transformed our office space completely. Their attention to detail and professionalism were outstanding. Highly recommended for any commercial renovation projects.",
     accent: "yellow",
   },
   {

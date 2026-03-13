@@ -3,13 +3,14 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
-import { sanitizeProjectHtml, slugifyProjectTitle } from "@/lib/projects";
+import { normalizeProjectImages, sanitizeProjectHtml, slugifyProjectTitle } from "@/lib/projects";
 
 export const runtime = "nodejs";
 
 const projectSchema = z.object({
   title: z.string().trim().min(1).max(160),
   imageUrl: z.string().trim().min(1),
+  images: z.array(z.string().trim().min(1)).min(1),
   description: z.string().trim().min(1),
   serviceId: z.string().trim().min(1),
 });
@@ -33,6 +34,10 @@ function revalidateProjectPaths(slug?: string) {
   if (slug) {
     revalidatePath(`/project/${slug}`);
   }
+}
+
+function isMissingImagesJsonColumnError(error: unknown) {
+  return error instanceof Error && /imagesJson/i.test(error.message) && /column|field/i.test(error.message);
 }
 
 export async function GET() {
@@ -69,20 +74,45 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }
 
-    const created = await prisma.project.create({
-      data: {
-        title: body.title,
-        slug: await createUniqueSlug(body.title),
-        imageUrl: body.imageUrl,
-        description: sanitizeProjectHtml(body.description),
-        serviceId: body.serviceId,
-      },
-      include: {
-        service: {
-          select: { id: true, title: true },
+    const slug = await createUniqueSlug(body.title);
+    let created;
+
+    try {
+      created = await prisma.project.create({
+        data: {
+          title: body.title,
+          slug,
+          imageUrl: body.imageUrl,
+          imagesJson: JSON.stringify(normalizeProjectImages(body.images, body.imageUrl)),
+          description: sanitizeProjectHtml(body.description),
+          serviceId: body.serviceId,
         },
-      },
-    });
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
+        },
+      });
+    } catch (error) {
+      if (!isMissingImagesJsonColumnError(error)) {
+        throw error;
+      }
+
+      created = await prisma.project.create({
+        data: {
+          title: body.title,
+          slug,
+          imageUrl: body.imageUrl,
+          description: sanitizeProjectHtml(body.description),
+          serviceId: body.serviceId,
+        },
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
+        },
+      });
+    }
 
     revalidateProjectPaths(created.slug);
 

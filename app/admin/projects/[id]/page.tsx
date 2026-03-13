@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin";
 import { prisma } from "@/lib/prisma";
+import { normalizeProjectImages, parseProjectImages } from "@/lib/projects";
 import ProjectForm from "../ProjectForm";
 
 export default async function EditProjectPage({ params }: { params: { id: string } }) {
@@ -28,6 +29,7 @@ export default async function EditProjectPage({ params }: { params: { id: string
         id: project.id,
         title: project.title,
         imageUrl: project.imageUrl,
+        images: normalizeProjectImages(parseProjectImages(project.imagesJson), project.imageUrl),
         description: project.description,
         serviceId: project.serviceId || "",
       }}

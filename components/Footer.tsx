@@ -45,72 +45,9 @@ function FooterTitle({
 export default function Footer() {
   return (
     <section className="w-full">
-      <section className="relative lg:py-10">
-        {/* split background for desktop */}
-        <div className="absolute inset-0 hidden lg:block">
-          <div className="grid h-full grid-cols-2">
-            <div className="bg-black" />
-            <div className="bg-yellow-400" />
-          </div>
-        </div>
-
-        <div className="relative mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-0">
-            {/* left */}
-            <div className="text-center">
-              <div className="flex flex-wrap gap-8 items-center justify-center">
-                <div className="px-[15px] py-[15px]">
-                  <img
-                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-1.png"
-                    alt="Certificate 1"
-                    className="h-auto w-[122px]"
-                  />
-                </div>
-                <div className="px-[15px] py-[15px]">
-                  <img
-                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-2.png"
-                    alt="Certificate 2"
-                    className="h-auto w-[122px]"
-                  />
-                </div>
-                <div className="px-[15px] py-[15px]">
-                  <img
-                    src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-certificate-3.png"
-                    alt="Certificate 3"
-                    className="h-auto w-[122px]"
-                  />
-                </div>
-              </div>
-
-              <p className="mt-6 text-center text-md text-white font-alt">
-                We are recognized all over the world - Our Awards Through
-              </p>
-            </div>
-
-            {/* right */}
-            <div className="bg-yellow-400 px-5 py-5 sm:px-8 sm:py-8 lg:ml-[8%] lg:bg-transparent lg:px-0 lg:py-0">
-              <h3 className="font-alt mb-5 text-center text-2xl font-semibold text-black lg:text-left">
-                All Major Cards Accepted
-              </h3>
-
-              <div className="flex flex-col items-center justify-center lg:items-start xl:flex-row xl:justify-start">
-                <img
-                  src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-1.png"
-                  alt="Cards accepted"
-                  className="h-auto w-auto max-w-full"
-                />
-                <img
-                  src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-2.webp"
-                  alt="More payment options"
-                  className="mt-[9px] h-auto w-auto max-w-full xl:ml-[18px] xl:mt-0"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       {/* Main footer */}
-      <section className="relative overflow-hidden bg-[#181818] px-4 py-[40px] sm:px-6 sm:py-[60px] xl:py-[90px]">
+      <section className="relative overflow-hidden bg-[#181818] px-4 sm:px-6 pt-[40px] sm:pt-[60px] xl:pt-[90px]">
         <div
           className="absolute inset-0 opacity-80"
           style={{
@@ -123,7 +60,7 @@ export default function Footer() {
         />
 
         <div className="relative mx-auto max-w-[1290px] px-6">
-          <div className="grid grid-cols-1 gap-y-10 md:grid-cols-2 md:gap-x-[30px] xl:grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-[30px] xl:grid-cols-4">
             {/* About */}
             <div>
               <FooterTitle before="About Our" highlight="Global" />
@@ -218,6 +155,19 @@ export default function Footer() {
               </div>
             </div>
           </div>
+          
+          <div className="flex flex-row items-center justify-center gap-4 lg:items-center xl:justify-center py-8">
+            <img
+              src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-1.png"
+              alt="Cards accepted"
+              className="h-auto w-auto max-w-full h-[40px] sm:h-[60px] md:h-auto"
+            />
+            <img
+              src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-2.webp"
+              alt="More payment options"
+              className="h-auto w-auto max-w-full h-[40px] sm:h-[60px] md:h-auto"
+            />
+          </div>
         </div>
       </section>
 
@@ -230,23 +180,7 @@ export default function Footer() {
               
             </div>
 
-            {/* <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
-              <Link
-                href="#"
-                className="inline-flex items-center gap-2 font-['Poppins'] text-[15px] text-white transition hover:text-[#FFC527]"
-              >
-                <Circle size={6} fill="currentColor" />
-                <span>Privacy Policy</span>
-              </Link>
-
-              <Link
-                href="#"
-                className="inline-flex items-center gap-2 font-['Poppins'] text-[15px] text-white transition hover:text-[#FFC527]"
-              >
-                <Circle size={6} fill="currentColor" />
-                <span>Terms &amp; Condition</span>
-              </Link>
-            </div> */}
+           
           </div>
         </div>
       </section>
