@@ -80,7 +80,7 @@ export default function Hero() {
   const [hasMounted, setHasMounted] = useState(false);
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const AUTO_MS = 1000000;
+  const AUTO_MS = 10000;
   const SLIDE_FADE_MS = 5000;
   const SERVICE_ZOOM_MS = 520;
   const SERVICE_IN_STAGGER_MS = 240;
