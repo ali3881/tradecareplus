@@ -44,14 +44,29 @@ export async function GET() {
   try {
     await requireAdmin();
 
-    const items = await prisma.project.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        service: {
-          select: { id: true, title: true },
+    let items;
+
+    try {
+      items = await prisma.project.findMany({
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.warn("Falling back to createdAt ordering for admin projects:", error);
+
+      items = await prisma.project.findMany({
+        orderBy: { createdAt: "desc" },
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
+        },
+      });
+    }
 
     return NextResponse.json(items);
   } catch (error) {
@@ -74,6 +89,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }
 
+    let nextSortOrder = 0;
+
+    try {
+      const maxSort = await prisma.project.aggregate({
+        _max: { sortOrder: true },
+      });
+      nextSortOrder = (maxSort._max.sortOrder ?? -1) + 1;
+    } catch (error) {
+      console.warn("Falling back to default project sort order:", error);
+    }
+
     const slug = await createUniqueSlug(body.title);
     let created;
 
@@ -86,6 +112,7 @@ export async function POST(request: Request) {
           imagesJson: JSON.stringify(normalizeProjectImages(body.images, body.imageUrl)),
           description: sanitizeProjectHtml(body.description),
           serviceId: body.serviceId,
+          sortOrder: nextSortOrder,
         },
         include: {
           service: {
@@ -95,23 +122,43 @@ export async function POST(request: Request) {
       });
     } catch (error) {
       if (!isMissingImagesJsonColumnError(error)) {
-        throw error;
+        console.warn("Retrying project create with reduced fields:", error);
       }
 
-      created = await prisma.project.create({
-        data: {
-          title: body.title,
-          slug,
-          imageUrl: body.imageUrl,
-          description: sanitizeProjectHtml(body.description),
-          serviceId: body.serviceId,
-        },
-        include: {
-          service: {
-            select: { id: true, title: true },
+      try {
+        created = await prisma.project.create({
+          data: {
+            title: body.title,
+            slug,
+            imageUrl: body.imageUrl,
+            description: sanitizeProjectHtml(body.description),
+            serviceId: body.serviceId,
+            sortOrder: nextSortOrder,
           },
-        },
-      });
+          include: {
+            service: {
+              select: { id: true, title: true },
+            },
+          },
+        });
+      } catch (fallbackError) {
+        console.warn("Retrying project create without sortOrder:", fallbackError);
+
+        created = await prisma.project.create({
+          data: {
+            title: body.title,
+            slug,
+            imageUrl: body.imageUrl,
+            description: sanitizeProjectHtml(body.description),
+            serviceId: body.serviceId,
+          },
+          include: {
+            service: {
+              select: { id: true, title: true },
+            },
+          },
+        });
+      }
     }
 
     revalidateProjectPaths(created.slug);

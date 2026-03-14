@@ -118,9 +118,7 @@ export default function Services() {
                       <h3 className="font-alt text-md font-extrabold leading-none text-white md:text-[28px]">
                         {service.title}
                       </h3>
-                      <p className="mt-3 max-w-xl break-words pr-1 text-sm leading-6 text-white/80 [overflow-wrap:anywhere]">
-                        {serviceExcerpt(service.description, 110)}
-                      </p>
+                     
                     </div>
                   </div>
                 </Link>

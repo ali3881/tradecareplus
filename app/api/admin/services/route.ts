@@ -40,9 +40,19 @@ function revalidateServicePaths(slug?: string) {
 export async function GET() {
   try {
     await requireAdmin();
-    const items = await prisma.service.findMany({
-      orderBy: { createdAt: "desc" },
-    });
+    let items;
+
+    try {
+      items = await prisma.service.findMany({
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+      });
+    } catch (error) {
+      console.warn("Falling back to createdAt ordering for admin services:", error);
+
+      items = await prisma.service.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+    }
 
     return NextResponse.json(items);
   } catch (error) {
@@ -60,15 +70,43 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid icon selection" }, { status: 400 });
     }
 
-    const created = await prisma.service.create({
-      data: {
-        title: body.title,
-        slug: await createUniqueSlug(body.title),
-        imageUrl: body.imageUrl,
-        description: sanitizeServiceHtml(body.description),
-        iconKey: body.iconKey,
-      },
-    });
+    let nextSortOrder = 0;
+
+    try {
+      const maxSort = await prisma.service.aggregate({
+        _max: { sortOrder: true },
+      });
+      nextSortOrder = (maxSort._max.sortOrder ?? -1) + 1;
+    } catch (error) {
+      console.warn("Falling back to default service sort order:", error);
+    }
+
+    let created;
+
+    try {
+      created = await prisma.service.create({
+        data: {
+          title: body.title,
+          slug: await createUniqueSlug(body.title),
+          imageUrl: body.imageUrl,
+          description: sanitizeServiceHtml(body.description),
+          iconKey: body.iconKey,
+          sortOrder: nextSortOrder,
+        },
+      });
+    } catch (error) {
+      console.warn("Retrying service create without sortOrder:", error);
+
+      created = await prisma.service.create({
+        data: {
+          title: body.title,
+          slug: await createUniqueSlug(body.title),
+          imageUrl: body.imageUrl,
+          description: sanitizeServiceHtml(body.description),
+          iconKey: body.iconKey,
+        },
+      });
+    }
 
     revalidateServicePaths(created.slug);
 

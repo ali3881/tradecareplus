@@ -7,14 +7,29 @@ export const revalidate = 0;
 
 export async function GET() {
   try {
-    const items = await prisma.project.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        service: {
-          select: { id: true, title: true },
+    let items;
+
+    try {
+      items = await prisma.project.findMany({
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.warn("Falling back to createdAt ordering for projects:", error);
+
+      items = await prisma.project.findMany({
+        orderBy: { createdAt: "desc" },
+        include: {
+          service: {
+            select: { id: true, title: true },
+          },
+        },
+      });
+    }
 
     return NextResponse.json(items);
   } catch (error) {

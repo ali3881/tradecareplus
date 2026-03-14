@@ -7,9 +7,19 @@ export const revalidate = 0;
 
 export async function GET() {
   try {
-    const items = await prisma.service.findMany({
-      orderBy: { createdAt: "desc" },
-    });
+    let items;
+
+    try {
+      items = await prisma.service.findMany({
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+      });
+    } catch (error) {
+      console.warn("Falling back to createdAt ordering for services:", error);
+
+      items = await prisma.service.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+    }
 
     return NextResponse.json(items);
   } catch (error) {

@@ -11,12 +11,14 @@ type ServiceItem = {
   slug: string;
   description: string;
   iconKey: string;
+  sortOrder: number;
 };
 
 export default function ServicesList() {
   const [items, setItems] = useState<ServiceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -45,6 +47,40 @@ export default function ServicesList() {
     } finally {
       setDeletingId(null);
     }
+  };
+
+  const persistOrder = async (nextItems: ServiceItem[]) => {
+    try {
+      const res = await fetch("/api/admin/services/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: nextItems.map((item) => item.id) }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Failed to save service order");
+      }
+    } catch (error: any) {
+      alert(error.message || "Failed to save service order");
+      await load();
+    }
+  };
+
+  const handleDropOn = async (targetId: string) => {
+    if (!draggingId || draggingId === targetId) return;
+
+    const next = [...items];
+    const fromIndex = next.findIndex((item) => item.id === draggingId);
+    const toIndex = next.findIndex((item) => item.id === targetId);
+
+    if (fromIndex < 0 || toIndex < 0) return;
+
+    const [moved] = next.splice(fromIndex, 1);
+    next.splice(toIndex, 0, moved);
+    setItems(next);
+    setDraggingId(null);
+    await persistOrder(next);
   };
 
   return (
@@ -77,11 +113,24 @@ export default function ServicesList() {
                 const Icon = getServiceIcon(item.iconKey);
 
                 return (
-                  <tr key={item.id} className="hover:bg-gray-50">
+                  <tr
+                    key={item.id}
+                    className="hover:bg-gray-50"
+                    draggable
+                    onDragStart={() => setDraggingId(item.id)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={() => handleDropOn(item.id)}
+                    onDragEnd={() => setDraggingId(null)}
+                  >
                     <td className="px-5 py-4">
-                      <div className="font-medium text-gray-900">{item.title}</div>
-                      <div className="max-w-[480px] truncate text-xs text-gray-500">
-                        {stripServiceHtml(item.description)}
+                      <div className="flex items-start gap-3">
+                        <span className="pt-0.5 text-gray-300 cursor-grab select-none">⋮⋮</span>
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900">{item.title}</div>
+                          <div className="max-w-[480px] truncate text-xs text-gray-500">
+                            {stripServiceHtml(item.description)}
+                          </div>
+                        </div>
                       </div>
                     </td>
                     <td className="px-5 py-4">

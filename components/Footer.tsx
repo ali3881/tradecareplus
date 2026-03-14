@@ -20,7 +20,7 @@ const openingHours = [
 ];
 
 const contactItems = [
-  { label: "Address", value: "123 Street Name, City, Country, Zip Code" },
+  { label: "Address", value: "67 York St Sydney" },
   { label: "Phone", value: "0410 886 899", href: "tel:0410886899" },
   { label: "Email", value: "info@tradecareplus.com.au", href: "mailto:info@tradecareplus.com.au" },
 ];
@@ -160,12 +160,12 @@ export default function Footer() {
             <img
               src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-1.png"
               alt="Cards accepted"
-              className="h-auto w-auto max-w-full h-[40px] sm:h-[60px] md:h-auto"
+              className="h-auto w-auto max-w-full h-[36px] sm:h-[50px] md:h-auto"
             />
             <img
               src="https://wdtelethemes.wpengine.com/homefix-elementor/wp-content/uploads/sites/5/2023/11/footer-payment-2.webp"
               alt="More payment options"
-              className="h-auto w-auto max-w-full h-[40px] sm:h-[60px] md:h-auto"
+              className="h-auto w-auto max-w-full h-[36px] sm:h-[50px] md:h-auto"
             />
           </div>
         </div>
