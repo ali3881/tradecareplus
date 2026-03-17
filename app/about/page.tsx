@@ -51,8 +51,7 @@ export default async function AboutPage() {
         </div>
       </div>
       
-      <About />
-      <Stats />
+
       
       <section className="bg-gray-50 py-20">
         <div className="mx-auto max-w-[1100px] px-6">
@@ -191,6 +190,9 @@ export default async function AboutPage() {
           </section>
         </div>
       </section>
+      
+      <About />
+      <Stats />
     </main>
   );
 }
