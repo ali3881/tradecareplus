@@ -26,6 +26,9 @@ model User {
   assignedJobs    ServiceRequest[] @relation("AssignedJobs")
   serviceRequests ServiceRequest[]
   subscription    Subscription?
+  submittedReviews JobReview[]
+  hireBookings    HireBooking[]
+  saleInquiries   SaleInquiry[]
   transactions    Transaction[]
   videoRooms      VideoRoom[]
 }
@@ -47,19 +50,27 @@ model Subscription {
 }
 
 model Transaction {
-  id               String        @id @default(cuid())
-  userId           String
-  subscriptionId   String?
-  stripeInvoiceId  String?       @unique
-  stripePaymentId  String?
-  amount           Int
-  currency         String
-  status           String
-  description      String?
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
-  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  subscription     Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  id                    String        @id @default(cuid())
+  userId                String?
+  subscriptionId        String?
+  hireBookingId         String?
+  sourceType            String        @default("SUBSCRIPTION")
+  sourceLabel           String?
+  customerName          String?
+  customerEmail         String?
+  customerPhone         String?
+  stripeInvoiceId       String?       @unique
+  stripeCheckoutSessionId String?     @unique
+  stripePaymentId       String?
+  amount                Int
+  currency              String
+  status                String
+  description           String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  user                  User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  subscription          Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  hireBooking           HireBooking?  @relation(fields: [hireBookingId], references: [id], onDelete: SetNull)
 }
 
 model Entitlement {
@@ -146,10 +157,37 @@ model ServiceRequest {
   notesJson              String?
   createdAt              DateTime    @default(now())
   updatedAt              DateTime    @updatedAt
+  completedAt            DateTime?
   assignedToId           String?
   attachments            FileAsset[]
+  review                 JobReview?
+  reviewRequest          JobReviewRequest?
   assignedTo             User?       @relation("AssignedJobs", fields: [assignedToId], references: [id])
   user                   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model JobReviewRequest {
+  id               String         @id @default(cuid())
+  serviceRequestId String         @unique
+  tokenHash        String         @unique
+  sentToEmail      String
+  expiresAt        DateTime
+  usedAt           DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+}
+
+model JobReview {
+  id               String         @id @default(cuid())
+  serviceRequestId String         @unique
+  userId           String
+  rating           Int
+  comment          String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model AuditLog {
@@ -213,4 +251,66 @@ model Service {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   projects    Project[]
+}
+
+model CatalogItem {
+  id                String        @id @default(cuid())
+  name              String
+  slug              String        @unique
+  category          String
+  itemType          String
+  pricingModel      String
+  price             Float
+  quantityAvailable Int           @default(1)
+  imageUrl          String?
+  shortDescription  String?
+  description       String
+  unitLabel         String?
+  minHireDays       Int           @default(1)
+  isActive          Boolean       @default(true)
+  sortOrder         Int           @default(0)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  hireBookings      HireBooking[]
+  saleInquiries     SaleInquiry[]
+}
+
+model HireBooking {
+  id                String      @id @default(cuid())
+  itemId            String
+  userId            String?
+  customerName      String
+  customerEmail     String
+  customerPhone     String?
+  startDate         DateTime
+  endDate           DateTime
+  quantity          Int         @default(1)
+  billableUnits     Float
+  totalPrice        Float
+  currency          String      @default("AUD")
+  status            String      @default("PENDING_PAYMENT")
+  stripeSessionId   String?     @unique
+  stripePaymentId   String?
+  checkoutExpiresAt DateTime?
+  notes             String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  item              CatalogItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  user              User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  transactions      Transaction[]
+}
+
+model SaleInquiry {
+  id            String      @id @default(cuid())
+  itemId        String
+  userId        String?
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  message       String?
+  status        String      @default("NEW")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  item          CatalogItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
 }

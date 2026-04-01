@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from 'react';
 import { X, Download, FileVideo, Image as ImageIcon } from 'lucide-react';
+import StarRating from "@/components/StarRating";
 
 interface FileAsset {
   id: string;
@@ -21,6 +22,11 @@ interface ServiceRequest {
   status: string;
   createdAt: string;
   attachments: FileAsset[];
+  review?: {
+    rating: number;
+    comment: string | null;
+    createdAt: string;
+  } | null;
 }
 
 interface JobDetailsModalProps {
@@ -105,6 +111,28 @@ export default function JobDetailsModal({ job, onClose }: JobDetailsModalProps) 
                         {job.description}
                     </p>
                 </div>
+
+                {job.review && (
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">Your Review</h4>
+                    <div className="mt-2 rounded-xl border border-yellow-100 bg-yellow-50 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <StarRating rating={job.review.rating} size={16} />
+                          <span className="text-sm font-semibold text-gray-800">{job.review.rating}/5</span>
+                        </div>
+                        <span className="text-xs text-gray-500">
+                          {new Date(job.review.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      {job.review.comment ? (
+                        <p className="mt-3 text-sm leading-6 text-gray-700">{job.review.comment}</p>
+                      ) : (
+                        <p className="mt-3 text-sm italic text-gray-500">You submitted a star rating without a comment.</p>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 {/* Attachments */}
                 <div>

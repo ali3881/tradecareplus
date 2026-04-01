@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { buildJobCreatedSms, sendSms } from "@/lib/sms";
 
 const createServiceRequestSchema = z.object({
   type: z.string().min(1).max(100),
@@ -146,7 +147,21 @@ export async function POST(req: Request) {
            await new Promise(r => setTimeout(r, 200 * (4 - retries))); // 200, 400, 600ms
          } else {
            throw e;
-         }
+        }
+      }
+    }
+
+    if (user.phone) {
+      try {
+        await sendSms({
+          to: user.phone,
+          body: buildJobCreatedSms({
+            customerName: user.name,
+            jobType: body.type,
+          }),
+        });
+      } catch (smsError) {
+        console.error("Failed to send job created SMS:", smsError);
       }
     }
 

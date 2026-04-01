@@ -9,11 +9,12 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { hasDashboardAccess } from "@/lib/access";
 import AdminPanel from "@/components/AdminPanel";
 
-export default function DashboardClient({ user }: { user: any }) {
+export default function DashboardClient({ user, initialJobs = [] }: { user: any; initialJobs?: any[] }) {
   const [showJobForm, setShowJobForm] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any | null>(null);
-  const [jobs, setJobs] = useState<any[]>([]);
+  const [jobs, setJobs] = useState<any[]>(initialJobs);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [loadingJobId, setLoadingJobId] = useState<string | null>(null);
   const sub = user.subscription;
   const isActive = hasDashboardAccess(user, sub);
 
@@ -51,6 +52,33 @@ export default function DashboardClient({ user }: { user: any }) {
       setDeletingId(null);
     }
   };
+
+  const handleViewJob = async (id: string) => {
+    setLoadingJobId(id);
+    try {
+      const res = await fetch(`/api/service-requests/${id}`, {
+        method: "GET",
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        alert(err?.message || "Failed to load job details.");
+        return;
+      }
+
+      const data = await res.json();
+      setSelectedJob(data);
+    } catch (error) {
+      console.error("Failed to load job details", error);
+      alert("Failed to load job details.");
+    } finally {
+      setLoadingJobId(null);
+    }
+  };
+
+  useEffect(() => {
+    setJobs(initialJobs);
+  }, [initialJobs]);
 
   useEffect(() => {
     if (isActive) {
@@ -221,11 +249,16 @@ export default function DashboardClient({ user }: { user: any }) {
                       <p className="text-xs text-gray-400">{new Date(job.createdAt).toLocaleDateString()}</p>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => setSelectedJob(job)}
+                          onClick={() => handleViewJob(job.id)}
                           className="text-gray-400 hover:text-blue-500 transition-colors"
                           title="View Details"
+                          disabled={loadingJobId === job.id}
                         >
-                          <Eye className="h-5 w-5" />
+                          {loadingJobId === job.id ? (
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                          ) : (
+                            <Eye className="h-5 w-5" />
+                          )}
                         </button>
                         <a
                           href={buildWhatsAppUrl({

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import PhoneNumberField from "@/components/PhoneNumberField";
+import { parseStoredPhoneNumber } from "@/lib/phone";
 
 type UserData = {
   name: string;
@@ -9,7 +11,10 @@ type UserData = {
 };
 
 export default function AccountSettingsClient({ initialUser }: { initialUser: UserData }) {
+  const parsedInitialPhone = parseStoredPhoneNumber(initialUser.phone);
   const [profile, setProfile] = useState(initialUser);
+  const [phoneCountryCode, setPhoneCountryCode] = useState(parsedInitialPhone.dialCode);
+  const [phoneNumber, setPhoneNumber] = useState(parsedInitialPhone.localNumber);
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileMessage, setProfileMessage] = useState<string>("");
 
@@ -32,7 +37,8 @@ export default function AccountSettingsClient({ initialUser }: { initialUser: Us
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: profile.name,
-          phone: profile.phone,
+          phoneCountryCode,
+          phoneNumber,
         }),
       });
 
@@ -46,6 +52,9 @@ export default function AccountSettingsClient({ initialUser }: { initialUser: Us
         name: data.user?.name || prev.name,
         phone: data.user?.phone || "",
       }));
+      const nextParsedPhone = parseStoredPhoneNumber(data.user?.phone || "");
+      setPhoneCountryCode(nextParsedPhone.dialCode);
+      setPhoneNumber(nextParsedPhone.localNumber);
       setProfileMessage("Profile updated successfully.");
     } catch (error: any) {
       setProfileMessage(error.message || "Failed to update profile.");
@@ -128,11 +137,11 @@ export default function AccountSettingsClient({ initialUser }: { initialUser: Us
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-              <input
-                type="text"
-                value={profile.phone}
-                onChange={(e) => setProfile((p) => ({ ...p, phone: e.target.value }))}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              <PhoneNumberField
+                dialCode={phoneCountryCode}
+                localNumber={phoneNumber}
+                onDialCodeChange={setPhoneCountryCode}
+                onLocalNumberChange={setPhoneNumber}
               />
             </div>
 

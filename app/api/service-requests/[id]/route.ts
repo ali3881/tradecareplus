@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { getReviewByServiceRequestId } from "@/lib/review-analytics";
 
 export const runtime = "nodejs";
 
@@ -61,7 +62,12 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(job);
+    const review = await getReviewByServiceRequestId(job.id);
+
+    return NextResponse.json({
+      ...job,
+      review,
+    });
   } catch (error: any) {
     console.error("Failed to fetch service request:", error);
     return NextResponse.json(

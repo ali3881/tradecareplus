@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 import { BarChart2, TrendingUp, Users, DollarSign } from "lucide-react";
+import StarRating from "@/components/StarRating";
+import { getReviewAggregate, getReviewRatingCounts } from "@/lib/review-analytics";
 
 export default async function AdminReportsPage() {
   await requireAdmin();
@@ -30,6 +32,9 @@ export default async function AdminReportsPage() {
   });
 
   const estimatedRevenue = (revenueAgg._sum.amount || 0) / 100;
+  const reviewAgg = await getReviewAggregate();
+  const ratingCounts = await getReviewRatingCounts();
+  const averageRating = reviewAgg._avg.rating || 0;
 
   return (
     <div className="space-y-8">
@@ -58,8 +63,11 @@ export default async function AdminReportsPage() {
                  <h3 className="font-bold text-gray-700">Customer Satisfaction</h3>
                  <Users className="text-blue-500" />
              </div>
-             <div className="text-3xl font-bold text-gray-900">4.8/5</div>
-             <p className="text-sm text-gray-500 mt-1">Based on recent feedback</p>
+             <div className="text-3xl font-bold text-gray-900">{averageRating.toFixed(1)}/5</div>
+             <div className="mt-2">
+               <StarRating rating={Math.round(averageRating)} />
+             </div>
+             <p className="text-sm text-gray-500 mt-1">Based on {reviewAgg._count.id} submitted reviews</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
@@ -96,6 +104,33 @@ export default async function AdminReportsPage() {
                       </div>
                   </div>
               ))}
+          </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="font-bold text-gray-800 mb-6">Rating Summary</h3>
+          <div className="space-y-4">
+              {ratingCounts.length === 0 ? (
+                <p className="text-sm text-gray-500">No customer ratings have been submitted yet.</p>
+              ) : (
+                ratingCounts.map((entry: { rating: number; _count: { id: number } }) => (
+                  <div key={entry.rating}>
+                    <div className="mb-2 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm font-medium text-gray-700">{entry.rating} star</span>
+                        <StarRating rating={entry.rating} size={14} />
+                      </div>
+                      <span className="text-sm text-gray-500">{entry._count.id} review(s)</span>
+                    </div>
+                    <div className="h-2.5 w-full rounded-full bg-gray-100">
+                      <div
+                        className="h-2.5 rounded-full bg-amber-400"
+                        style={{ width: `${reviewAgg._count.id ? (entry._count.id / reviewAgg._count.id) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </div>
+                ))
+              )}
           </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Trash2, Save, Loader2 } from "lucide-react";
+import { Trash2, Save, Loader2, Send } from "lucide-react";
 
 export default function JobActions({ 
   id, 
@@ -11,6 +11,8 @@ export default function JobActions({
   staffList,
   canManageAssignment = true,
   canDelete = true,
+  canResendReview = false,
+  isLocked = false,
 }: { 
   id: string; 
   currentStatus: string;
@@ -18,12 +20,15 @@ export default function JobActions({
   staffList?: any[];
   canManageAssignment?: boolean;
   canDelete?: boolean;
+  canResendReview?: boolean;
+  isLocked?: boolean;
 }) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
   const [assignedTo, setAssignedTo] = useState(currentAssignedTo || "");
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [resendingReview, setResendingReview] = useState(false);
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -43,7 +48,8 @@ export default function JobActions({
       if (res.ok) {
         router.refresh();
       } else {
-        alert("Failed to update job");
+        const data = await res.json().catch(() => null);
+        alert(data?.error || "Failed to update job");
       }
     } catch (e) {
       alert("Error updating job");
@@ -73,54 +79,96 @@ export default function JobActions({
     }
   };
 
+  const handleResendReview = async () => {
+    setResendingReview(true);
+    try {
+      const res = await fetch(`/api/admin/jobs/${id}/resend-review`, {
+        method: "POST",
+      });
+      if (res.ok) {
+        alert("Review request sent successfully.");
+        router.refresh();
+      } else {
+        const data = await res.json().catch(() => null);
+        alert(data?.error || "Failed to resend review request");
+      }
+    } catch (e) {
+      alert("Error resending review request");
+    } finally {
+      setResendingReview(false);
+    }
+  };
+
   const hasChanges =
-    status !== currentStatus ||
-    (canManageAssignment && assignedTo !== (currentAssignedTo || ""));
+    !isLocked &&
+    (
+      status !== currentStatus ||
+      (canManageAssignment && assignedTo !== (currentAssignedTo || ""))
+    );
 
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        {/* Staff Assignment */}
-        {canManageAssignment && (
-          <select
-            value={assignedTo}
-            onChange={(e) => setAssignedTo(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer min-w-[150px]"
-          >
-            <option value="">Unassigned</option>
-            {staffList?.map((staff) => (
-              <option key={staff.id} value={staff.id}>
-                {staff.name}
-              </option>
-            ))}
-          </select>
+        {!isLocked && (
+          <>
+            {canManageAssignment && (
+              <select
+                value={assignedTo}
+                onChange={(e) => setAssignedTo(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer min-w-[150px]"
+              >
+                <option value="">Unassigned</option>
+                {staffList?.map((staff) => (
+                  <option key={staff.id} value={staff.id}>
+                    {staff.name}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer"
+            >
+              <option value="NEW">New</option>
+              <option value="ASSIGNED">Assigned</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="AWAITING_PARTS">Awaiting Parts</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+
+            <button
+              onClick={handleUpdate}
+              disabled={loading || !hasChanges}
+              className={`p-2 rounded-lg text-white transition-colors ${
+                loading || !hasChanges ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"
+              }`}
+              title="Save Changes"
+            >
+              {loading ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
+            </button>
+          </>
         )}
 
-        {/* Status */}
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm bg-white cursor-pointer"
-        >
-          <option value="NEW">New</option>
-          <option value="ASSIGNED">Assigned</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="AWAITING_PARTS">Awaiting Parts</option>
-          <option value="COMPLETED">Completed</option>
-          <option value="CANCELLED">Cancelled</option>
-        </select>
-        
-        <button
-          onClick={handleUpdate}
-          disabled={loading || !hasChanges}
-          className={`p-2 rounded-lg text-white transition-colors ${
-            loading || !hasChanges ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"
-          }`}
-          title="Save Changes"
-        >
-          {loading ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
-        </button>
+        {canResendReview && currentStatus === "COMPLETED" && !isLocked && (
+          <button
+            onClick={handleResendReview}
+            disabled={resendingReview}
+            className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {resendingReview ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+            <span>Resend Review</span>
+          </button>
+        )}
       </div>
+
+      {isLocked && (
+        <p className="text-sm text-gray-500">
+          This job is closed because the customer has already submitted a review.
+        </p>
+      )}
 
       {canDelete && (
         <>

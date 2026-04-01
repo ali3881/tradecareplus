@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getReviewsByServiceRequestIds } from "@/lib/review-analytics";
 
 export const runtime = "nodejs";
 
@@ -49,7 +50,16 @@ export async function GET(req: Request) {
       }),
     ]);
 
-    return NextResponse.json({ users, jobs });
+    const reviews = await getReviewsByServiceRequestIds(jobs.map((job) => job.id));
+    const reviewMap = new Map(
+      reviews.map((review: { serviceRequestId: string; rating: number; comment: string | null; createdAt: Date }) => [review.serviceRequestId, review])
+    );
+    const jobsWithReviews = jobs.map((job) => ({
+      ...job,
+      review: reviewMap.get(job.id) || null,
+    }));
+
+    return NextResponse.json({ users, jobs: jobsWithReviews });
   } catch (error) {
     console.error("Error fetching admin summary:", error);
     return new NextResponse("Internal Server Error", { status: 500 });

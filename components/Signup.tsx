@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import PhoneNumberField from "@/components/PhoneNumberField";
+import { defaultPhoneCountry, validatePhoneLocalNumber } from "@/lib/phone";
 
 export default function Signup() {
   const router = useRouter();
@@ -17,7 +19,8 @@ export default function Signup() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneCountryCode: defaultPhoneCountry.dialCode,
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
     plan: "",
@@ -57,6 +60,13 @@ export default function Signup() {
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const phoneValidation = validatePhoneLocalNumber(formData.phoneCountryCode, formData.phoneNumber);
+    if (!phoneValidation.valid) {
+      setError(phoneValidation.message);
       setIsSubmitting(false);
       return;
     }
@@ -191,16 +201,17 @@ export default function Signup() {
                 />
               </div>
 
-              <div className="relative">
-                <Phone className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Phone Number"
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                  <Phone className="h-4 w-4 text-gray-400" />
+                  <span>Phone Number</span>
+                </div>
+                <PhoneNumberField
+                  dialCode={formData.phoneCountryCode}
+                  localNumber={formData.phoneNumber}
+                  onDialCodeChange={(value) => setFormData((prev) => ({ ...prev, phoneCountryCode: value }))}
+                  onLocalNumberChange={(value) => setFormData((prev) => ({ ...prev, phoneNumber: value }))}
                   required
-                  className="w-full rounded border border-gray-300 bg-white py-3 pl-11 pr-4 text-sm text-gray-700 outline-none transition-colors focus:border-yellow-500"
                 />
               </div>
 

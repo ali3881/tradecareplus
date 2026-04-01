@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 import Link from "next/link";
-import { ArrowLeft, User, Mail, Calendar, Shield, CreditCard } from "lucide-react";
+import { ArrowLeft, User, Phone, CreditCard } from "lucide-react";
 import UserActions from "./UserActions";
 
 export default async function AdminUserDetailsPage({
@@ -62,6 +62,10 @@ export default async function AdminUserDetailsPage({
                   <div>
                       <label className="text-xs font-bold text-gray-500 uppercase">Joined</label>
                       <p className="text-sm text-gray-700">{new Date(user.createdAt).toLocaleDateString()}</p>
+                  </div>
+                  <div>
+                      <label className="text-xs font-bold text-gray-500 uppercase">Phone</label>
+                      <p className="text-sm text-gray-700">{user.phone || "Not provided"}</p>
                   </div>
               </div>
           </div>

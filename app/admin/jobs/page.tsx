@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { requireAdminOrStaff } from "@/lib/admin";
 import Link from "next/link";
 import { Filter, Eye } from "lucide-react";
+import StarRating from "@/components/StarRating";
+import { getReviewsByServiceRequestIds } from "@/lib/review-analytics";
 
 export default async function AdminJobsPage({
   searchParams,
@@ -35,6 +37,11 @@ export default async function AdminJobsPage({
       },
     },
   });
+
+  const reviews = await getReviewsByServiceRequestIds(jobs.map((job) => job.id));
+  const reviewsByJobId = new Map<string, { serviceRequestId: string; rating: number; comment: string | null; createdAt: Date }>(
+    reviews.map((review: { serviceRequestId: string; rating: number; comment: string | null; createdAt: Date }) => [review.serviceRequestId, review])
+  );
 
   const total = await prisma.serviceRequest.count({ where });
   const totalPages = Math.ceil(total / pageSize);
@@ -94,6 +101,7 @@ export default async function AdminJobsPage({
                 <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Urgency</th>
                 <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Assigned To</th>
                 <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Rating</th>
                 <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
                 <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Action</th>
               </tr>
@@ -140,6 +148,18 @@ export default async function AdminJobsPage({
                       {job.status}
                     </span>
                   </td>
+                  <td className="px-6 py-4">
+                    {reviewsByJobId.get(job.id) ? (
+                      <div className="flex flex-col gap-1">
+                        <StarRating rating={reviewsByJobId.get(job.id)!.rating} size={14} />
+                        <span className="text-xs text-gray-500">{reviewsByJobId.get(job.id)!.rating}/5</span>
+                      </div>
+                    ) : (
+                      <span className="text-xs italic text-gray-400">
+                        {job.status === "COMPLETED" ? "Pending review" : "Not available"}
+                      </span>
+                    )}
+                  </td>
                   <td className="px-6 py-4 text-gray-500 text-sm">
                     {new Date(job.createdAt).toLocaleDateString()}
                   </td>
@@ -152,7 +172,7 @@ export default async function AdminJobsPage({
               ))}
               {jobs.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={9} className="px-6 py-12 text-center text-gray-500">
                     No jobs found.
                   </td>
                 </tr>

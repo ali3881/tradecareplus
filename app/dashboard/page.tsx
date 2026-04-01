@@ -16,5 +16,29 @@ export default async function Dashboard() {
     include: { subscription: true, entitlement: true },
   });
 
-  return <DashboardClient user={user} />;
+  if (!user) {
+    redirect("/login");
+  }
+
+  const jobs = await prisma.serviceRequest.findMany({
+    where: user.role === "ADMIN" ? {} : user.role === "STAFF" ? { assignedToId: session.user.id } : { userId: session.user.id },
+    include:
+      user.role === "ADMIN"
+        ? {
+            attachments: true,
+            user: { select: { name: true, email: true, phone: true } },
+            assignedTo: { select: { name: true, email: true } },
+          }
+        : user.role === "STAFF"
+          ? {
+              attachments: true,
+              user: { select: { name: true, email: true, phone: true } },
+            }
+          : {
+              attachments: true,
+            },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return <DashboardClient user={user} initialJobs={jobs} />;
 }

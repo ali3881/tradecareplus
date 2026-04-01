@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { normalizePhoneNumber, validatePhoneLocalNumber } from "@/lib/phone";
 
 export const runtime = "nodejs";
 
@@ -9,7 +10,8 @@ const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  phone: z.string().optional(),
+  phoneCountryCode: z.string().min(1, "Country code is required"),
+  phoneNumber: z.string().min(1, "Phone number is required"),
   plan: z.string().min(1, "Plan is required"),
 });
 
@@ -23,7 +25,13 @@ export async function POST(req: Request) {
       return new NextResponse(errorMsg, { status: 400 });
     }
 
-    const { name, email, password, phone } = body.data;
+    const { name, password, phoneCountryCode, phoneNumber } = body.data;
+    const email = body.data.email.trim().toLowerCase();
+    const phoneValidation = validatePhoneLocalNumber(phoneCountryCode, phoneNumber);
+
+    if (!phoneValidation.valid) {
+      return new NextResponse(phoneValidation.message, { status: 400 });
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: { email },
@@ -41,7 +49,7 @@ export async function POST(req: Request) {
         name,
         email,
         passwordHash,
-        phone,
+        phone: normalizePhoneNumber(phoneCountryCode, phoneNumber),
         role: "USER",
       },
     });

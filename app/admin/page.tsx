@@ -1,7 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 import Link from "next/link";
-import { Users, Briefcase, AlertCircle, LayoutDashboard, CheckCircle, Clock, HardHat, CreditCard } from "lucide-react";
+import { Users, Briefcase, AlertCircle, LayoutDashboard, CheckCircle, Clock, HardHat, CreditCard, Star } from "lucide-react";
+import StarRating from "@/components/StarRating";
+import { getReviewAggregate } from "@/lib/review-analytics";
 
 export default async function AdminDashboard() {
   await requireAdmin();
@@ -13,6 +15,7 @@ export default async function AdminDashboard() {
   const inProgressCount = await prisma.serviceRequest.count({ where: { status: "IN_PROGRESS" } });
   const completedCount = await prisma.serviceRequest.count({ where: { status: "COMPLETED" } });
   const activeSubsCount = await prisma.subscription.count({ where: { status: "ACTIVE" } });
+  const reviewAgg = await getReviewAggregate();
 
   // Get recent activity (last 5 jobs)
   const recentJobs = await prisma.serviceRequest.findMany({
@@ -76,7 +79,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Secondary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
             <div>
                 <p className="text-sm text-gray-500 font-medium">Technicians</p>
@@ -97,6 +100,19 @@ export default async function AdminDashboard() {
                 <p className="text-2xl font-bold text-gray-900">{completedCount}</p>
             </div>
             <CheckCircle className="text-green-500 opacity-50" size={32} />
+         </div>
+         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+            <div>
+                <p className="text-sm text-gray-500 font-medium">Average Rating</p>
+                <div className="mt-1 flex items-center gap-3">
+                  <p className="text-2xl font-bold text-gray-900">
+                    {reviewAgg._avg.rating ? reviewAgg._avg.rating.toFixed(1) : "0.0"}
+                  </p>
+                  <StarRating rating={Math.round(reviewAgg._avg.rating || 0)} size={14} />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">{reviewAgg._count.id} submitted reviews</p>
+            </div>
+            <Star className="text-amber-500 opacity-50" size={32} />
          </div>
       </div>
       

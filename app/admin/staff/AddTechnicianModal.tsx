@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Loader2, X, Eye, EyeOff, Copy } from "lucide-react";
+import PhoneNumberField from "@/components/PhoneNumberField";
+import { defaultPhoneCountry, validatePhoneLocalNumber } from "@/lib/phone";
 
 interface AddTechnicianModalProps {
   isOpen: boolean;
@@ -13,7 +15,8 @@ export default function AddTechnicianModal({ isOpen, onClose, onCreated }: AddTe
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneCountryCode: defaultPhoneCountry.dialCode,
+    phoneNumber: "",
     tempPassword: "",
     isActive: true
   });
@@ -28,6 +31,15 @@ export default function AddTechnicianModal({ isOpen, onClose, onCreated }: AddTe
     e.preventDefault();
     setLoading(true);
     setError("");
+
+    if (formData.phoneNumber.trim()) {
+      const phoneValidation = validatePhoneLocalNumber(formData.phoneCountryCode, formData.phoneNumber);
+      if (!phoneValidation.valid) {
+        setError(phoneValidation.message);
+        setLoading(false);
+        return;
+      }
+    }
 
     // Auto-generate password if empty
     const finalPassword = formData.tempPassword || Math.random().toString(36).slice(-8) + "Aa1!";
@@ -58,7 +70,14 @@ export default function AddTechnicianModal({ isOpen, onClose, onCreated }: AddTe
   };
 
   const handleClose = () => {
-    setFormData({ name: "", email: "", phone: "", tempPassword: "", isActive: true });
+    setFormData({
+      name: "",
+      email: "",
+      phoneCountryCode: defaultPhoneCountry.dialCode,
+      phoneNumber: "",
+      tempPassword: "",
+      isActive: true,
+    });
     setSuccessData(null);
     setError("");
     onClose();
@@ -139,11 +158,11 @@ export default function AddTechnicianModal({ isOpen, onClose, onCreated }: AddTe
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-            <input
-              type="tel"
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
-              value={formData.phone}
-              onChange={e => setFormData({...formData, phone: e.target.value})}
+            <PhoneNumberField
+              dialCode={formData.phoneCountryCode}
+              localNumber={formData.phoneNumber}
+              onDialCodeChange={(value) => setFormData((prev) => ({ ...prev, phoneCountryCode: value }))}
+              onLocalNumberChange={(value) => setFormData((prev) => ({ ...prev, phoneNumber: value }))}
             />
           </div>
 

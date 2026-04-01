@@ -1,5 +1,7 @@
 "use client";
 
+import { Receipt } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 type Subscription = {
@@ -10,37 +12,19 @@ type Subscription = {
   currentPeriodEnd: string;
 } | null;
 
-type Transaction = {
-  id: string;
-  amount: number;
-  currency: string;
-  status: string;
-  stripeInvoiceId?: string | null;
-  createdAt: string;
-};
-
 export default function ManageSubscriptionClient() {
   const [subscription, setSubscription] = useState<Subscription>(null);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [billingLoading, setBillingLoading] = useState(false);
 
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [subRes, txRes] = await Promise.all([
-        fetch("/api/billing/subscription", { cache: "no-store" }),
-        fetch("/api/billing/transactions", { cache: "no-store" }),
-      ]);
+      const subRes = await fetch("/api/billing/subscription", { cache: "no-store" });
 
       if (subRes.ok) {
         const subData = await subRes.json();
         setSubscription(subData.subscription || null);
-      }
-
-      if (txRes.ok) {
-        const txData = await txRes.json();
-        setTransactions(txData.transactions || []);
       }
     } finally {
       setLoading(false);
@@ -103,15 +87,6 @@ export default function ManageSubscriptionClient() {
             <div className="h-4 w-72 bg-gray-200 rounded" />
           </div>
         </div>
-        <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden">
-          <div className="h-16 bg-gray-100 border-b border-gray-100" />
-          <div className="p-6 space-y-3">
-            <div className="h-10 bg-gray-100 rounded-lg" />
-            <div className="h-10 bg-gray-100 rounded-lg" />
-            <div className="h-10 bg-gray-100 rounded-lg" />
-            <div className="h-10 bg-gray-100 rounded-lg" />
-          </div>
-        </div>
       </div>
     );
   }
@@ -119,10 +94,19 @@ export default function ManageSubscriptionClient() {
   return (
     <div className="w-full max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-8">
       <div className="rounded-2xl bg-gradient-to-r from-gray-900 to-gray-700 text-white p-6 sm:p-8 shadow-lg">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Manage Subscription</h1>
-        <p className="text-sm sm:text-base text-gray-200 mt-2">
-          Update your plan, manage billing, and review payment history.
-        </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="md:max-w-2xl">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Manage Subscription</h1>
+            <p className="mt-2 text-sm text-gray-200 sm:text-base">
+              Update your plan, manage billing, and review payment history.
+            </p>
+          </div>
+          <div className="md:flex md:justify-end">
+            <Link href="/account/transactions" className="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-gray-100 transition hover:bg-white/10 hover:text-white">
+              <Receipt className="mr-1 h-4 w-4" /> Transactions
+            </Link>
+          </div>
+        </div>
       </div>
 
       <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
@@ -167,49 +151,6 @@ export default function ManageSubscriptionClient() {
             <p className="text-sm text-gray-500">
               Current period ends on {new Date(subscription.currentPeriodEnd).toLocaleDateString()}.
             </p>
-          )}
-        </div>
-      </div>
-
-      <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
-        <div className="px-6 py-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900">My Transactions</h3>
-          <button onClick={loadData} className="text-sm font-medium text-yellow-700 hover:text-yellow-800">Refresh</button>
-        </div>
-        <div className="overflow-x-auto">
-          {transactions.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">No transactions yet.</div>
-          ) : (
-            <table className="w-full text-left">
-              <thead className="bg-gray-50/70 border-b border-gray-100">
-                <tr>
-                  <th className="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
-                  <th className="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Amount</th>
-                  <th className="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Currency</th>
-                  <th className="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Invoice</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {transactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm text-gray-600">{new Date(tx.createdAt).toLocaleString()}</td>
-                    <td className="px-4 py-3 font-semibold text-gray-900">${(tx.amount / 100).toFixed(2)}</td>
-                    <td className="px-4 py-3 text-gray-600 uppercase">{tx.currency}</td>
-                    <td className="px-4 py-3">
-                      <span className={`px-2 py-1 text-xs font-bold rounded-full ${
-                        tx.status === "PAID" ? "bg-green-100 text-green-700" :
-                        tx.status === "FAILED" ? "bg-red-100 text-red-700" :
-                        "bg-gray-100 text-gray-700"
-                      }`}>
-                        {tx.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 font-mono text-xs text-gray-500">{tx.stripeInvoiceId || "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           )}
         </div>
       </div>

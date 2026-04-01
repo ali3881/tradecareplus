@@ -10,7 +10,8 @@ import {
   LogOut, 
   LayoutDashboard, 
   ChevronDown,
-  CreditCard
+  CreditCard,
+  Briefcase
 } from "lucide-react";
 
 type UserMenuProps = {
@@ -146,6 +147,17 @@ export default function UserMenu({ variant = "dark" }: UserMenuProps) {
                         <CreditCard size={16} />
                     </div>
                     Manage Subscription
+                </Link>
+                <Link 
+                    href="/account/activity" 
+                    className="flex items-center px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors group"
+                    role="menuitem"
+                    onClick={() => setIsOpen(false)}
+                >
+                    <div className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mr-3 group-hover:bg-amber-100 transition-colors">
+                        <Briefcase size={16} />
+                    </div>
+                    Bookings & Enquiries
                 </Link>
                 <Link 
                     href="/account" 

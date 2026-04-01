@@ -14,19 +14,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 Copy the example environment file:
 
 ```bash
-cp .env.local.example .env
+cp .env.example .env
 ```
 
 Ensure `DATABASE_URL` is set. 
 
-**For Local Development (SQLite):**
+**For Local Development Against Live/Staging PostgreSQL:**
 ```
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://user:password@host:5432/tradecareplus?schema=public"
 ```
 
 **For Production (PostgreSQL):**
 ```
-DATABASE_URL="postgresql://user:password@host:5432/dbname"
+DATABASE_URL="postgresql://user:password@host:5432/tradecareplus?schema=public"
 ```
 
 ### 3. Setup & Run
@@ -41,7 +41,7 @@ Generate Prisma client:
 npx prisma generate
 ```
 
-Run database migrations (creates `dev.db` for SQLite):
+Run database migrations:
 ```bash
 npx prisma migrate dev
 ```
@@ -57,25 +57,19 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ### Reset Database
 
-**SQLite (Local):**
-Delete the `dev.db` file and re-run migrations:
-```bash
-rm dev.db
-npx prisma migrate dev
-```
-
-**PostgreSQL (Prod/Staging):**
+**PostgreSQL (Dev/Prod/Staging):**
 *Caution: This destroys data*
 ```bash
 npx prisma migrate reset
 ```
 
-### Switching to PostgreSQL
+### Prisma Client After DB Changes
 
-1. Update `DATABASE_URL` in `.env` to your Postgres connection string.
-2. Update `prisma/schema.prisma`:
-   Change `provider = "sqlite"` to `provider = "postgresql"`.
-3. Run `npx prisma generate` and `npx prisma migrate dev`.
+If you change `DATABASE_URL` or switch databases, regenerate the Prisma client:
+
+```bash
+npx prisma generate
+```
 
 ## Health Check
 

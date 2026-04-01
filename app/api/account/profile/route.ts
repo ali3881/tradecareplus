@@ -3,12 +3,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { normalizePhoneNumber, validatePhoneLocalNumber } from "@/lib/phone";
 
 export const runtime = "nodejs";
 
 const profileSchema = z.object({
   name: z.string().min(2).max(100),
-  phone: z.string().max(30).optional().or(z.literal("")),
+  phoneCountryCode: z.string().min(1).optional(),
+  phoneNumber: z.string().optional().or(z.literal("")),
 });
 
 export async function PATCH(req: Request) {
@@ -23,11 +25,21 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ error: "Invalid input", issues: parsed.error.issues }, { status: 400 });
     }
 
+    const dialCode = parsed.data.phoneCountryCode?.trim() || "";
+    const localNumber = parsed.data.phoneNumber?.trim() || "";
+
+    if (localNumber) {
+      const phoneValidation = validatePhoneLocalNumber(dialCode, localNumber);
+      if (!phoneValidation.valid) {
+        return NextResponse.json({ error: phoneValidation.message }, { status: 400 });
+      }
+    }
+
     const updated = await prisma.user.update({
       where: { id: session.user.id },
       data: {
         name: parsed.data.name.trim(),
-        phone: parsed.data.phone?.trim() || null,
+        phone: localNumber ? normalizePhoneNumber(dialCode, localNumber) : null,
       },
       select: {
         id: true,

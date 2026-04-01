@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdminOrStaff } from "@/lib/admin";
 import Link from "next/link";
-import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Download, PlayCircle, Phone, Mail } from "lucide-react";
+import { ArrowLeft, User, MapPin, Clock, Calendar, FileText, Download, PlayCircle, Phone, Mail, MessageSquareMore } from "lucide-react";
 import JobActions from "./JobActions";
+import StarRating from "@/components/StarRating";
+import { getReviewByServiceRequestId, getReviewRequestByServiceRequestId } from "@/lib/review-analytics";
 
 export default async function AdminJobDetailsPage({
   params,
@@ -47,6 +49,11 @@ export default async function AdminJobDetailsPage({
       })
     : [];
 
+  const [review, reviewRequest] = await Promise.all([
+    getReviewByServiceRequestId(params.id),
+    getReviewRequestByServiceRequestId(params.id),
+  ]);
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -77,6 +84,8 @@ export default async function AdminJobDetailsPage({
           staffList={staff}
           canManageAssignment={isAdmin}
           canDelete={isAdmin}
+          canResendReview={!review && (isAdmin || job.assignedToId === session.user.id)}
+          isLocked={!!review}
         />
       </div>
 
@@ -244,6 +253,34 @@ export default async function AdminJobDetailsPage({
                  </div>
               </div>
            </div>
+
+           {review && (
+             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+               <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                 <h2 className="text-lg font-bold text-gray-800 flex items-center">
+                   <MessageSquareMore size={20} className="mr-2 text-gray-500" />
+                   Customer Rating
+                 </h2>
+                 <div className="flex items-center gap-3">
+                   <StarRating rating={review.rating} />
+                   <span className="text-sm font-bold text-gray-700">{review.rating}/5</span>
+                 </div>
+               </div>
+
+               <div className="mt-5 space-y-4">
+                 <p className="text-sm text-gray-500">
+                   Submitted on {new Date(review.createdAt).toLocaleString()}
+                 </p>
+                 {review.comment ? (
+                   <div className="rounded-xl border border-amber-100 bg-amber-50 px-4 py-4 text-sm leading-6 text-gray-700">
+                     {review.comment}
+                   </div>
+                 ) : (
+                   <p className="text-sm italic text-gray-500">Customer left a star rating without a written comment.</p>
+                 )}
+               </div>
+             </div>
+           )}
         </div>
       </div>
     </div>

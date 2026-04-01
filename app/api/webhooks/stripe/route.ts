@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 import Stripe from "stripe";
+import {
+  buildHireBookingAdminEmailTemplate,
+  buildHireBookingCustomerEmailTemplate,
+  sendMail,
+} from "@/lib/mailer";
 
 export const runtime = "nodejs";
 
@@ -48,6 +53,123 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed") {
     const checkoutSession = event.data.object as Stripe.Checkout.Session;
+    const checkoutType = checkoutSession.metadata?.type;
+
+    if (checkoutType === "hire_booking") {
+      const bookingId = checkoutSession.metadata?.bookingId;
+
+      if (!bookingId) {
+        return new NextResponse("Missing booking metadata", { status: 400 });
+      }
+
+      const booking = await prisma.hireBooking.findUnique({
+        where: { id: bookingId },
+        include: {
+          item: true,
+        },
+      });
+
+      if (!booking) {
+        return new NextResponse("Booking not found", { status: 404 });
+      }
+
+      const updated = await prisma.hireBooking.update({
+        where: { id: booking.id },
+        data: {
+          status: "PAID",
+          stripePaymentId: typeof checkoutSession.payment_intent === "string" ? checkoutSession.payment_intent : null,
+          checkoutExpiresAt: null,
+        },
+        include: {
+          item: true,
+        },
+      });
+
+      await prisma.transaction.upsert({
+        where: {
+          stripeCheckoutSessionId: checkoutSession.id,
+        },
+        update: {
+          ...(updated.userId ? { userId: updated.userId } : {}),
+          hireBookingId: updated.id,
+          sourceType: "HIRE_BOOKING",
+          sourceLabel: updated.item.name,
+          customerName: updated.customerName,
+          customerEmail: updated.customerEmail,
+          customerPhone: updated.customerPhone,
+          stripePaymentId: typeof checkoutSession.payment_intent === "string" ? checkoutSession.payment_intent : undefined,
+          amount: Math.round(updated.totalPrice * 100),
+          currency: (updated.currency || "AUD").toUpperCase(),
+          status: "PAID",
+          description: `${updated.item.name} booking payment`,
+        },
+        create: {
+          ...(updated.userId ? { userId: updated.userId } : {}),
+          hireBookingId: updated.id,
+          sourceType: "HIRE_BOOKING",
+          sourceLabel: updated.item.name,
+          customerName: updated.customerName,
+          customerEmail: updated.customerEmail,
+          customerPhone: updated.customerPhone,
+          stripeCheckoutSessionId: checkoutSession.id,
+          ...(typeof checkoutSession.payment_intent === "string"
+            ? { stripePaymentId: checkoutSession.payment_intent }
+            : {}),
+          amount: Math.round(updated.totalPrice * 100),
+          currency: (updated.currency || "AUD").toUpperCase(),
+          status: "PAID",
+          description: `${updated.item.name} booking payment`,
+        },
+      });
+
+      const formattedDates = {
+        start: updated.startDate.toLocaleDateString("en-AU"),
+        end: updated.endDate.toLocaleDateString("en-AU"),
+      };
+      const totalPrice = new Intl.NumberFormat("en-AU", {
+        style: "currency",
+        currency: updated.currency || "AUD",
+      }).format(updated.totalPrice);
+      const adminRecipient = process.env.SMTP_USER || updated.customerEmail;
+
+      const adminEmail = buildHireBookingAdminEmailTemplate({
+        itemName: updated.item.name,
+        customerName: updated.customerName,
+        customerEmail: updated.customerEmail,
+        customerPhone: updated.customerPhone,
+        startDate: formattedDates.start,
+        endDate: formattedDates.end,
+        quantity: updated.quantity,
+        totalPrice,
+      });
+
+      const customerEmail = buildHireBookingCustomerEmailTemplate({
+        customerName: updated.customerName,
+        itemName: updated.item.name,
+        startDate: formattedDates.start,
+        endDate: formattedDates.end,
+        quantity: updated.quantity,
+        totalPrice,
+      });
+
+      await Promise.all([
+        sendMail({
+          to: adminRecipient,
+          subject: adminEmail.subject,
+          html: adminEmail.html,
+          text: adminEmail.text,
+        }),
+        sendMail({
+          to: updated.customerEmail,
+          subject: customerEmail.subject,
+          html: customerEmail.html,
+          text: customerEmail.text,
+        }),
+      ]);
+
+      return new NextResponse(null, { status: 200 });
+    }
+
     const stripeSubscriptionId = checkoutSession.subscription as string;
     const userId = checkoutSession.metadata?.userId || checkoutSession.client_reference_id || undefined;
 
@@ -110,6 +232,24 @@ export async function POST(req: Request) {
         cctvDueAt: plan === "PREMIUM" ? threeMonths : null,
       },
     });
+  }
+
+  if (event.type === "checkout.session.expired") {
+    const checkoutSession = event.data.object as Stripe.Checkout.Session;
+    if (checkoutSession.metadata?.type === "hire_booking") {
+      const bookingId = checkoutSession.metadata?.bookingId;
+      if (bookingId) {
+        await prisma.hireBooking.updateMany({
+          where: {
+            id: bookingId,
+            status: "PENDING_PAYMENT",
+          },
+          data: {
+            status: "EXPIRED",
+          },
+        });
+      }
+    }
   }
 
   if (event.type === "customer.subscription.updated") {
@@ -204,7 +344,10 @@ export async function POST(req: Request) {
       await prisma.transaction.upsert({
         where: { stripeInvoiceId: invoice.id },
         update: {
+          userId: subscription.userId,
           stripePaymentId: typeof invoiceAny.payment_intent === "string" ? invoiceAny.payment_intent : null,
+          sourceType: "SUBSCRIPTION",
+          sourceLabel: subscription.plan,
           amount: invoice.amount_paid || invoice.amount_due || 0,
           currency: (invoice.currency || "usd").toUpperCase(),
           status: event.type === "invoice.paid" ? "PAID" : "FAILED",
@@ -214,6 +357,8 @@ export async function POST(req: Request) {
         create: {
           userId: subscription.userId,
           subscriptionId: subscription.id,
+          sourceType: "SUBSCRIPTION",
+          sourceLabel: subscription.plan,
           stripeInvoiceId: invoice.id,
           stripePaymentId: typeof invoiceAny.payment_intent === "string" ? invoiceAny.payment_intent : null,
           amount: invoice.amount_paid || invoice.amount_due || 0,

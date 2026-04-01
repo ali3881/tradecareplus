@@ -15,6 +15,17 @@ export async function GET() {
     const transactions = await prisma.transaction.findMany({
       where: { userId: session.user.id },
       orderBy: { createdAt: "desc" },
+      include: {
+        hireBooking: {
+          include: {
+            item: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
       take: 100,
     });
 

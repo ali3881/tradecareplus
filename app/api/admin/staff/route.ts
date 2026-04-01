@@ -3,11 +3,13 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { normalizePhoneNumber, validatePhoneLocalNumber } from "@/lib/phone";
 
 const createStaffSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
-  phone: z.string().optional(),
+  phoneCountryCode: z.string().min(1).optional(),
+  phoneNumber: z.string().optional().or(z.literal("")),
   isActive: z.boolean().optional(),
   tempPassword: z.string().optional(),
 });
@@ -19,10 +21,20 @@ export async function POST(request: Request) {
     await requireAdmin();
     const json = await request.json();
     const body = createStaffSchema.parse(json);
+    const email = body.email.trim().toLowerCase();
+    const dialCode = body.phoneCountryCode?.trim() || "";
+    const localNumber = body.phoneNumber?.trim() || "";
+
+    if (localNumber) {
+      const phoneValidation = validatePhoneLocalNumber(dialCode, localNumber);
+      if (!phoneValidation.valid) {
+        return NextResponse.json({ error: phoneValidation.message }, { status: 400 });
+      }
+    }
 
     // Check if user exists
     const existingUser = await prisma.user.findUnique({
-      where: { email: body.email },
+      where: { email },
     });
 
     if (existingUser) {
@@ -44,8 +56,8 @@ export async function POST(request: Request) {
     const newUser = await prisma.user.create({
       data: {
         name: body.name,
-        email: body.email,
-        phone: body.phone,
+        email,
+        phone: localNumber ? normalizePhoneNumber(dialCode, localNumber) : null,
         role: "STAFF",
         isActive: body.isActive ?? true,
         passwordHash,

@@ -18,6 +18,15 @@ export async function GET() {
             email: true,
           },
         },
+        hireBooking: {
+          include: {
+            item: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
       },
       take: 500,
     });

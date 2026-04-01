@@ -3,6 +3,8 @@
 import { UserPlus, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
+import PhoneNumberField from "@/components/PhoneNumberField";
+import { defaultPhoneCountry, validatePhoneLocalNumber } from "@/lib/phone";
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -14,7 +16,8 @@ export default function SignupModal({ isOpen, onClose, initialPlan }: SignupModa
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneCountryCode: defaultPhoneCountry.dialCode,
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
     plan: ""
@@ -36,6 +39,13 @@ export default function SignupModal({ isOpen, onClose, initialPlan }: SignupModa
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const phoneValidation = validatePhoneLocalNumber(formData.phoneCountryCode, formData.phoneNumber);
+    if (!phoneValidation.valid) {
+      setError(phoneValidation.message);
       setIsSubmitting(false);
       return;
     }
@@ -144,14 +154,12 @@ export default function SignupModal({ isOpen, onClose, initialPlan }: SignupModa
                     required
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
                   />
-                  <input 
-                    type="tel" 
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
+                  <PhoneNumberField
+                    dialCode={formData.phoneCountryCode}
+                    localNumber={formData.phoneNumber}
+                    onDialCodeChange={(value) => setFormData((prev) => ({ ...prev, phoneCountryCode: value }))}
+                    onLocalNumberChange={(value) => setFormData((prev) => ({ ...prev, phoneNumber: value }))}
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-sm text-gray-700 outline-none focus:border-yellow-500 transition-colors"
                   />
               </div>
               
