@@ -1,6 +1,7 @@
 "use client";
 
 import Hero from "../components/Hero";
+import LandingVideo from "../components/LandingVideo";
 import About from "../components/About";
 import Services from "../components/Services";
 import Pricing from "../components/Pricing";
@@ -15,6 +16,7 @@ export default function Home() {
     <div className="flex-grow flex flex-col">
       <main className="flex-grow">
         <Hero />
+        <LandingVideo />
         <About />
         <Pricing />
         <Services />
